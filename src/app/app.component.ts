@@ -226,7 +226,7 @@ export class AppComponent implements OnInit {
       head.appendChild(element);
     }
     element.setAttribute('rel', 'canonical');
-    element.setAttribute('href', `https://rxjs.dev/${this.currentPath}`);
+    element.setAttribute('href', `https://docs.ddoo.dev/${this.currentPath}`);
     this.isTransitioning = false;
   }
 
