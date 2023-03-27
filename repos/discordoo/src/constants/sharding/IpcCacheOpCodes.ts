@@ -1,0 +1,18 @@
+export enum IpcCacheOpCodes {
+  Get,
+  Set,
+  Delete,
+  Foreach,
+  Size,
+  Has,
+  Sweep,
+  Filter,
+  Map,
+  Find,
+  Clear,
+  Count,
+  Counts,
+  Keys,
+  Values,
+  Entries,
+}

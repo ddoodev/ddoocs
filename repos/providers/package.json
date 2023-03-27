@@ -1,0 +1,42 @@
+{
+  "name": "@discordoo/providers",
+  "version": "0.11.0",
+  "description": "Interfaces that must be implemented by custom providers for Discordoo (typescript only).",
+  "main": "dist/index.js",
+  "types": "types/index.d.ts",
+  "scripts": {
+    "build": "ttsc -p tsconfig.json",
+    "lint": "eslint",
+    "prepublishOnly": "npm run build",
+    "docs": "npx tapok ./docs/docs.json -c typedoc.js"
+  },
+  "devDependencies": {
+    "@discordoo/tapok": "^2.0.19",
+    "@types/node": "^17.0.23",
+    "@typescript-eslint/eslint-plugin": "^4.18.0",
+    "@typescript-eslint/parser": "^4.18.0",
+    "@zerollup/ts-transform-paths": "^1.7.18",
+    "eslint": "^7.22.0",
+    "ttypescript": "^1.5.12",
+    "typescript": "^4.3.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ddoodev/providers.git"
+  },
+  "author": {
+    "name": "Mirdukkk",
+    "email": "dev@ddoo.dev"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ddoodev/providers/issues"
+  },
+  "homepage": "https://github.com/ddoodev/providers#readme",
+  "engines": {
+    "node": ">=12.18"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

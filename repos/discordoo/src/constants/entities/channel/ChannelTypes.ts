@@ -1,0 +1,15 @@
+export enum ChannelTypes {
+  GuildText,
+  Dm,
+  GuildVoice,
+  GroupDm,
+  GuildCategory,
+  GuildNews,
+  GuildStore,
+  GuildNewsThread = 10,
+  GuildPublicThread,
+  GuildPrivateThread,
+  GuildStageVoice,
+  GuildDirectory,
+  GuildForum,
+}

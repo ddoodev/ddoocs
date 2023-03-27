@@ -1,0 +1,11 @@
+{% macro githubViewHref(doc, versionInfo) -%}
+https://github.com/{$ versionInfo.gitRepoInfo.owner $}/{$ doc.fileInfo.realProjectRelativePath.split('/')[0] $}/tree/develop/{$ doc.fileInfo.realProjectRelativePath.split('/').slice(1).join('/')$}#L{$ doc.startingLine + 1 $}-L{$ doc.endingLine + 1 $}
+{%- endmacro %}
+
+{% macro githubEditHref(doc, versionInfo) -%}
+https://github.com/{$ versionInfo.gitRepoInfo.owner $}/{$ doc.fileInfo.realProjectRelativePath.split('/')[0] $}/edit/develop/{$ doc.fileInfo.realProjectRelativePath.split('/').slice(1).join('/')$}?message=docs(
+  {%- if doc.moduleDoc %}{$ doc.moduleDoc.id.split('/')[0] $}
+  {%- elseif doc.docType === 'module' %}{$ doc.id.split('/')[0] $}
+  {%- else %}...{%- endif -%}
+)%3A%20describe%20your%20change...#L{$ doc.startingLine + 1 $}-L{$ doc.endingLine + 1 $}
+{%- endmacro %}

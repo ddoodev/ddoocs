@@ -1,0 +1,6 @@
+export { ChildShardingManagerOptions } from './ChildShardingManagerOptions'
+export { ProcessesShardingOptions } from './ProcessesShardingOptions'
+export { ClustersShardingOptions } from './ClustersShardingOptions'
+export { MachinesShardingOptions } from './MachinesShardingOptions'
+export { ShardingManagerOptions } from './ShardingManagerOptions'
+export { WorkersShardingOptions } from './WorkersShardingOptions'

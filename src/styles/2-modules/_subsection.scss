@@ -1,0 +1,20 @@
+.l-sub-section {
+    color: $darkgray;
+    background-color: rgba($shrimp, 0.05);
+    border-left: 8px solid $shrimp;
+    padding: 16px;
+    margin-bottom: 8px;
+    display: table;
+    clear: both;
+    width: 100%;
+    box-sizing: border-box;
+
+    h3 {
+        margin: 8px 0 0;
+    }
+
+    a:hover {
+        color: $shrimp;
+        text-decoration: underline;
+    }
+}

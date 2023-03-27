@@ -1,0 +1,15 @@
+{
+  "packages": [
+    "api",
+    "events",
+    "cache",
+    "collection",
+    "constants",
+    "core",
+    "rest",
+    "sharding",
+    "utils",
+    "gateway",
+    "wrapper"
+  ]
+}

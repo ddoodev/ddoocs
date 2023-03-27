@@ -1,0 +1,39 @@
+{
+  "TopBar": [
+    {
+      "url": "guide",
+      "title": "Overview"
+    },
+    {
+      "url": "api",
+      "title": "Reference"
+    }
+  ],
+  "TopBarNarrow": [],
+  "SideNav": [
+    {
+      "url": "guide",
+      "title": "Introduction",
+      "tooltip": "Introduction to Discordoo Library"
+    },
+    {
+      "title": "Overview",
+      "tooltip": "RxJS Overview",
+      "children": [
+        {
+          "url": "guide/part-one/concepts",
+          "title": "Concepts"
+        },
+        {
+          "url": "guide/part-one/intents",
+          "title": "Intents"
+        }
+      ]
+    },
+    {
+      "url": "api",
+      "title": "Reference",
+      "tooltip": "Reference"
+    }
+  ]
+}

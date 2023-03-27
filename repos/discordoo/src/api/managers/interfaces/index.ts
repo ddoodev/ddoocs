@@ -1,0 +1,1 @@
+export { EntitiesCacheManagerData } from './EntitiesCacheManagerData'

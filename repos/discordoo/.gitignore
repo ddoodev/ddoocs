@@ -1,0 +1,26 @@
+# IDEs
+.idea
+.vscode
+
+# Dependencies
+node_modules
+
+# Build
+dist
+types
+!src/*/**/types
+
+# Environment
+.env
+
+# Misc
+tsconfig.tsbuildinfo
+
+# Docs
+docs
+docs.json
+
+# On-the-fly tests
+on-the-fly
+
+!src
