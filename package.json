@@ -33,7 +33,7 @@
     "update-webdriver": "webdriver-manager update --standalone false --gecko false $CHROMEDRIVER_VERSION_ARG",
     "~~build": "ng build --configuration=stable --source-map",
     "~~clean-generated": "node --eval \"require('shelljs').rm('-rf', 'src/generated')\"",
-    "deploy:cf": "git submodule update --init && npm run docs && npm run build"
+    "deploy:cf": "git submodule update --init && npm run build"
   },
   "engines": {
     "node": ">=10.9"
