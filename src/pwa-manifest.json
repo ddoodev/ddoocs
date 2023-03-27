@@ -1,6 +1,7 @@
 {
-  "short_name": "RxJS",
-  "name": "RxJS",
+  "short_name": "ddoocs",
+  "name": "discordoo documentation",
+  "id": "v1.0.0",
   "icons": [
     {
       "src": "assets/images/favicons/apple-touch-icon-144x144.png",
@@ -50,6 +51,6 @@
   ],
   "start_url": "/?utm_source=homescreen",
   "background_color": "#ffffff",
-  "theme_color": "#d81b60",
+  "theme_color": "#E14E4E",
   "display": "standalone"
 }
