@@ -1,1 +1,0 @@
-export { ApplicationEmojisManager } from './ApplicationEmojisManager'

@@ -1,1 +1,0 @@
-export { GuildEmojisUpdatedEventContext } from './GuildEmojisUpdatedEventContext'

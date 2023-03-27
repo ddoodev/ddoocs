@@ -1,7 +1,0 @@
-export { GatewayReceivePayloadLike } from './GatewayReceivePayloadLike'
-export { GatewaySendPayloadLike } from './GatewaySendPayloadLike'
-export { GatewaySendOptions } from './GatewaySendOptions'
-export { GatewayShardsInfo } from './GatewayShardsInfo'
-export { GatewayProvider } from './GatewayProvider'
-export { GatewayBotInfo } from './GatewayBotInfo'
-export { GatewayOpCodes } from './GatewayOpCodes'

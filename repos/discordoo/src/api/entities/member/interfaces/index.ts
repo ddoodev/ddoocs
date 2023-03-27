@@ -1,8 +1,0 @@
-export { GuildMemberData } from './GuildMemberData'
-export { GuildMemberEditData } from './GuildMemberEditData'
-export { GuildMemberResolvable } from './GuildMemberResolvable'
-export { RawGuildMemberData } from './RawGuildMemberData'
-export { RawGuildMemberEditData } from './RawGuildMemberEditData'
-export { RawThreadMemberData } from './RawThreadMemberData'
-export { ThreadMemberData } from './ThreadMemberData'
-export { ThreadMemberResolvable } from './ThreadMemberResolvable'

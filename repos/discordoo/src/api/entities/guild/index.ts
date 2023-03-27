@@ -1,6 +1,0 @@
-export * from './interfaces'
-export { AbstractGuild } from './AbstractGuild'
-export { AbstractViewableGuild } from './AbstractViewableGuild'
-export { Guild } from './Guild'
-export { InviteGuild } from './InviteGuild'
-export { OAuth2Guild } from '@src/api/entities/guild/OAuth2Guild'

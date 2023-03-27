@@ -1,6 +1,0 @@
-export { RestManagerRequestData } from './RestManagerRequestData'
-export { RestRateLimitBucket } from './RestRateLimitBucket'
-export { CompletedRestOptions } from './RestOptions'
-export { RestManagerData } from './RestManagerData'
-export { RestOptions } from './RestOptions'
-export { RestRequest } from './RestRequest'

@@ -1,0 +1,9 @@
+[submodule "repos/discordoo"]
+	path = repos/discordoo
+	url = https://github.com/ddoodev/discordoo
+[submodule "repos/providers"]
+	path = repos/providers
+	url = https://github.com/ddoodev/providers
+[submodule "repos/collection"]
+	path = repos/collection
+	url = https://github.com/ddoodev/collection
