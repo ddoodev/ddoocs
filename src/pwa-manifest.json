@@ -49,8 +49,8 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/?utm_source=homescreen",
-  "background_color": "#ffffff",
+  "start_url": "/guide",
+  "background_color": "#E14E4E",
   "theme_color": "#E14E4E",
   "display": "standalone"
 }
