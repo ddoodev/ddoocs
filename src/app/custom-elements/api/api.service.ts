@@ -29,7 +29,7 @@ export interface ApiSection {
 @Injectable()
 export class ApiService implements OnDestroy {
 
-  private apiBase = DOC_CONTENT_URL_PREFIX + 'api/';
+  private apiBase = DOC_CONTENT_URL_PREFIX + 'ref/';
   private apiListJsonDefault = 'api-list.json';
   private firstTime = true;
   private onDestroy = new Subject();

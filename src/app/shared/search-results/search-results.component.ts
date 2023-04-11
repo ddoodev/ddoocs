@@ -17,14 +17,14 @@ import { SearchResult, SearchResults, SearchArea } from 'app/search/interfaces';
         <ul class="priority-pages">
           <li class="search-page" *ngFor="let page of area.priorityPages">
             <a class="search-result-item" href="{{ page.path }}" (click)="onResultSelected(page, $event)">
-              <span class="symbol {{ page.type }}" *ngIf="area.name === 'api'"></span>{{ page.title }}
+              <span class="symbol {{ page.type }}" *ngIf="area.name === 'ref'"></span>{{ page.title }}
             </a>
           </li>
         </ul>
         <ul>
           <li class="search-page" *ngFor="let page of area.pages">
             <a class="search-result-item" href="{{ page.path }}" (click)="onResultSelected(page, $event)">
-              <span class="symbol {{ page.type }}" *ngIf="area.name === 'api'"></span>{{ page.title }}
+              <span class="symbol {{ page.type }}" *ngIf="area.name === 'ref'"></span>{{ page.title }}
             </a>
           </li>
         </ul>

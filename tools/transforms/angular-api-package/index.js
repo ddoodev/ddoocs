@@ -63,7 +63,6 @@ module.exports = new Package('angular-api', [basePackage, typeScriptPackage])
     readTypeScriptModules.ignoreExportsMatching = [/^[_ɵ]|^VERSION$/];
     readTypeScriptModules.hidePrivateMembers = true;
 
-    // NOTE: This list should be in sync with tools/public_api_guard/BUILD.bazel
     readTypeScriptModules.sourceFiles = [
       'discordoo/src/api/index.ts',
       'discordoo/src/cache/index.ts',
@@ -159,8 +158,7 @@ module.exports = new Package('angular-api', [basePackage, typeScriptPackage])
   })
 
   .config(function(computePathsProcessor, EXPORT_DOC_TYPES, generateApiListDoc, generateDeprecationListDoc) {
-
-    const API_SEGMENT = 'api';
+    const API_SEGMENT = 'ref';
 
     generateApiListDoc.outputFolder = API_SEGMENT;
     generateDeprecationListDoc.outputFolder = API_SEGMENT;
