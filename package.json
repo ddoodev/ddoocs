@@ -25,7 +25,7 @@
     "test-pwa-score": "node scripts/test-pwa-score",
     "payload-size": "scripts/payload.sh",
     "docs": "npx ts-node -P tsconfig.docs.json ./node_modules/dgeni/lib/gen-docs.js ./tools/transforms/angular.io-package",
-    "docs-watch": "npx ts-node -P tsconfig.docs.json tools/transforms/authors-package/watchr.js",
+    "docs-watch": "npx nodemon --watch content --ext * --exec \"npm run ~~clean-generated && npm run docs\"",
     "docs-lint": "eslint --ignore-path=\"tools/transforms/.eslintignore\" tools/transforms",
     "docs-test": "npx ts-node -P tsconfig.docs.json tools/transforms/test.js",
     "tools-lint": "tslint -c \"tools/tslint.json\"",
