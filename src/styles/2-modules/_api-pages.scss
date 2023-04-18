@@ -20,6 +20,7 @@
   }
 
   > h1 {
+    word-break: break-all;
     margin-right: 1rem;
   }
 }
@@ -107,6 +108,14 @@
   }
 }
 
+.horizontal-scrollable-table {
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+  margin-top: -25px;
+  padding-left: 3px;
+  padding-right: 3px;
+}
 
 .deprecated-api-item {
   text-decoration: line-through;
