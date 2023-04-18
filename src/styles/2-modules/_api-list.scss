@@ -181,6 +181,10 @@ aio-api-list {
     text-overflow: ellipsis;
     white-space: nowrap;
 
+    @media screen and (max-width: $phone-breakpoint) {
+      width: 100%;
+    }
+
     .symbol {
       margin-right: 8px;
     }
