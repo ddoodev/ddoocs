@@ -14,19 +14,28 @@
     {
       "url": "guide",
       "title": "Introduction",
-      "tooltip": "Introduction to Discordoo Library"
+      "tooltip": "Introduction to Discordoo"
+    },
+    {
+      "url": "guide/start",
+      "title": "Getting Started",
+      "tooltip": "Getting Started with Discordoo"
     },
     {
       "title": "Overview",
       "tooltip": "Discordoo Overview",
       "children": [
         {
-          "url": "guide/part-one/concepts",
+          "url": "guide/fundamental/concepts",
           "title": "Concepts"
         },
         {
-          "url": "guide/part-one/intents",
-          "title": "Intents"
+          "url": "guide/fundamental/structure",
+          "title": "Structure"
+        },
+        {
+          "url": "guide/fundamental/usage",
+          "title": "Usage"
         }
       ]
     },
