@@ -124,8 +124,13 @@ aio-code pre {
 }
 
 .sidenav-content code a {
-  color: inherit;
+  color: $shrimp;
   font-size: inherit;
+
+  &:hover {
+    color: $shrimp;
+    text-decoration-color: $mediumgray;
+  }
 }
 
 /* PRETTY PRINTING STYLES for prettify.js. */
