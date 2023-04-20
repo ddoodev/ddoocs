@@ -153,6 +153,8 @@ aio-search-box.search-container {
   width: 100%;
   min-width: 150px;
   height: 100%;
+  margin-right: 16px;
+  position: relative;
 
   input {
     color: $darkgray;
@@ -179,6 +181,39 @@ aio-search-box.search-container {
     }
     @media (max-width: 480px) {
       width: 150px;
+    }
+  }
+
+  .search-box-shortcut {
+    display: none;
+    position: absolute;
+    right: 16px;
+    line-height: 2.2rem;
+    padding: 0 0.8rem;
+    pointer-events: none;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 4px;
+    color: $darkgray;
+    border: 1px solid $darkgray;
+    height: 35%;
+    width: fit-content;
+  }
+
+  .search-box-shortcut-icon {
+    display: block;
+    font-size: 1rem;
+    margin: unset;
+    padding: unset;
+    color: $darkgray;
+    height: 95%;
+  }
+
+  input:not(:focus):placeholder-shown + .search-box-shortcut {
+    display: block;
+
+    @media screen and (max-width: $tablet-breakpoint) {
+      display: none;
     }
   }
 }

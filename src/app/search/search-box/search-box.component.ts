@@ -15,14 +15,17 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
  */
 @Component({
   selector: 'aio-search-box',
-  template: `<input #searchBox
-    type="search"
-    aria-label="search"
-    placeholder="Search"
-    (input)="doSearch()"
-    (keyup)="doSearch()"
-    (focus)="doFocus()"
-    (click)="doSearch()">`
+  template: `
+    <input #searchBox
+           type="search"
+           aria-label="search"
+           placeholder="Search"
+           (input)="doSearch()"
+           (keyup)="doSearch()"
+           (focus)="doFocus()"
+           (click)="doSearch()">
+    <div class="search-box-shortcut"><p class="search-box-shortcut-icon">/</p></div>
+  `
 })
 export class SearchBoxComponent implements OnInit {
 
