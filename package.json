@@ -33,7 +33,10 @@
     "update-webdriver": "webdriver-manager update --standalone false --gecko false $CHROMEDRIVER_VERSION_ARG",
     "~~build": "ng build --configuration=stable --source-map",
     "~~clean-generated": "node --eval \"require('shelljs').rm('-rf', 'src/generated')\"",
-    "deploy:cf": "git submodule update --init && npm run build"
+    "deploy:cf": "git submodule update --init && npm run build",
+    "content:build": "npx ts-node -P tsconfig.docs.json ./node_modules/dgeni/lib/gen-docs.js ./tools/transforms/angular-content-package",
+    "content:clean": "npx rimraf src/generated/docs/guide.json src/generated/docs/guide src/generated/images src/generated/navigation.json",
+    "content:watch": "npx nodemon --watch content/navigation.json --watch content/images --watch content/guide --ext * --exec \"npm run content:clean && npm run content:build\""
   },
   "engines": {
     "node": ">=10.9"
