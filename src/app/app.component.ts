@@ -125,7 +125,9 @@ export class AppComponent implements OnInit {
     this.documentService.currentDocument.subscribe((doc) => (this.currentDocument = doc));
 
     this.locationService.currentPath.subscribe((path) => {
-      if (path === this.currentPath) {
+      if (!path) {
+        this.locationService.go('/guide');
+      } else if (path === this.currentPath) {
         // scroll only if on same page (most likely a change to the hash)
         this.scrollService.scroll();
       } else {
