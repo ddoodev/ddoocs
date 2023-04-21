@@ -23,7 +23,6 @@
               "src/generated",
               "src/app/search/search-worker.js",
               "src/pwa-manifest.json",
-              "src/google385281288605d160.html",
               {
                 "glob": "custom-elements.min.js",
                 "input": "node_modules/@webcomponents/custom-elements",
@@ -33,6 +32,11 @@
                 "glob": "native-shim.js",
                 "input": "node_modules/@webcomponents/custom-elements/src",
                 "output": "/assets/js"
+              },
+              {
+                "glob": "robots.txt",
+                "input": "src/extra-files/stable",
+                "output": "./"
               }
             ],
             "styles": [
