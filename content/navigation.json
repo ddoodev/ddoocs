@@ -17,31 +17,56 @@
       "tooltip": "Introduction to Discordoo"
     },
     {
-      "url": "guide/start",
-      "title": "Getting Started",
-      "tooltip": "Getting Started with Discordoo"
-    },
-    {
       "title": "Overview",
       "tooltip": "Discordoo Overview",
       "children": [
         {
-          "url": "guide/fundamental/concepts",
+          "url": "guide/overview/install",
+          "title": "Installation"
+        },
+        {
+          "url": "guide/overview/docs",
+          "title": "Docs Features"
+        },
+        {
+          "url": "guide/overview/project",
+          "title": "First Project"
+        },
+        {
+          "url": "guide/overview/events",
+          "title": "Events"
+        },
+        {
+          "url": "guide/overview/cache",
+          "title": "Cache"
+        },
+        {
+          "url": "guide/overview/providers",
+          "title": "Providers"
+        }
+      ]
+    },
+    {
+      "title": "Fundamentals",
+      "tooltip": "Discordoo Fundamentals",
+      "children": [
+        {
+          "url": "guide/fundamentals/concepts",
           "title": "Concepts"
         },
         {
-          "url": "guide/fundamental/structure",
+          "url": "guide/fundamentals/structure",
           "title": "Structure"
         },
         {
-          "url": "guide/fundamental/usage",
+          "url": "guide/fundamentals/usage",
           "title": "Usage"
         }
       ]
     },
     {
       "url": "ref",
-      "title": "Reference",
+      "title": "API Reference",
       "tooltip": "Reference"
     }
   ]

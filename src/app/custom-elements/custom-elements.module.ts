@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ROUTES} from '@angular/router';
+import { ROUTES } from '@angular/router';
 import { ElementsLoader } from './elements-loader';
 import {
   ELEMENT_MODULE_LOAD_CALLBACKS,
