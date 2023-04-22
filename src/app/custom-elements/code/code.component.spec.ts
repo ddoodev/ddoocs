@@ -92,5 +92,5 @@ describe('CodeTabsComponent', () => {
   `
 })
 class HostComponent {
-  @ViewChild(CodeTabsComponent, {static: true}) codeTabsComponent: CodeTabsComponent;
+  @ViewChild(CodeTabsComponent, { static: true }) codeTabsComponent: CodeTabsComponent;
 }

@@ -11,7 +11,7 @@ import { NavigationNode } from 'app/navigation/navigation.model';
 
     <div *ngIf="node.children">
       <a
-        *ngIf="node.url != null"
+        *ngIf="node.url !== null"
         href="{{ node.url }}"
         [ngClass]="classes"
         title="{{ node.tooltip }}"
@@ -23,7 +23,7 @@ import { NavigationNode } from 'app/navigation/navigation.model';
       </a>
 
       <button
-        *ngIf="node.url == null"
+        *ngIf="node.url === null"
         type="button"
         [ngClass]="classes"
         title="{{ node.tooltip }}"

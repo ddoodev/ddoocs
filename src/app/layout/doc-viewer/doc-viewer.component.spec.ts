@@ -20,7 +20,7 @@ describe('DocViewerComponent', () => {
   let parentComponent: TestParentComponent;
   let docViewerEl: HTMLElement;
   let docViewer: TestDocViewerComponent;
-  let metaServiceMock: jasmine.SpyObj<Meta>
+  let metaServiceMock: jasmine.SpyObj<Meta>;
 
   const safeFlushAsapScheduler = () => asapScheduler.actions.length && asapScheduler.flush();
 
@@ -28,7 +28,7 @@ describe('DocViewerComponent', () => {
     metaServiceMock = jasmine.createSpyObj(['updateTag', 'addTag', 'removeTag']);
     TestBed.configureTestingModule({
       imports: [CustomElementsModule, TestModule],
-      providers: [{provide: Meta, useValue: metaServiceMock}]
+      providers: [{ provide: Meta, useValue: metaServiceMock }]
     });
 
     parentFixture = TestBed.createComponent(TestParentComponent);
@@ -48,7 +48,7 @@ describe('DocViewerComponent', () => {
     let renderSpy: jasmine.Spy;
 
     const setCurrentDoc = (newDoc: TestParentComponent['currentDoc']) => {
-      
+
       parentComponent.currentDoc =  newDoc; // set default with id if parameter is not defined
       parentFixture.detectChanges();  // Run change detection to propagate the new doc to `DocViewer`.
       safeFlushAsapScheduler();  // Flush `asapScheduler` to trigger `DocViewer#render()`.
@@ -57,24 +57,24 @@ describe('DocViewerComponent', () => {
     beforeEach(() => renderSpy = spyOn(docViewer, 'render').and.callFake(() => of(undefined)));
 
     it('should render the new document', () => {
-      setCurrentDoc({contents: 'foo', id: 'bar'});
+      setCurrentDoc({ contents: 'foo', id: 'bar' });
       expect(renderSpy).toHaveBeenCalledTimes(1);
-      expect(renderSpy.calls.mostRecent().args).toEqual([{id: 'bar', contents: 'foo'}]);
+      expect(renderSpy.calls.mostRecent().args).toEqual([{ id: 'bar', contents: 'foo' }]);
 
-      setCurrentDoc({contents: null, id: 'baz'});
+      setCurrentDoc({ contents: null, id: 'baz' });
       expect(renderSpy).toHaveBeenCalledTimes(2);
-      expect(renderSpy.calls.mostRecent().args).toEqual([{id: 'baz', contents: null}]);
+      expect(renderSpy.calls.mostRecent().args).toEqual([{ id: 'baz', contents: null }]);
     });
 
     it('should unsubscribe from the previous "render" observable upon new document', () => {
       const obs = new ObservableWithSubscriptionSpies();
       renderSpy.and.returnValue(obs);
 
-      setCurrentDoc({contents: 'foo', id: 'bar'});
+      setCurrentDoc({ contents: 'foo', id: 'bar' });
       expect(obs.subscribeSpy).toHaveBeenCalledTimes(1);
       expect(obs.unsubscribeSpies[0]).not.toHaveBeenCalled();
 
-      setCurrentDoc({contents: 'baz', id: 'qux'});
+      setCurrentDoc({ contents: 'baz', id: 'qux' });
       expect(obs.subscribeSpy).toHaveBeenCalledTimes(2);
       expect(obs.unsubscribeSpies[0]).toHaveBeenCalledTimes(1);
     });
@@ -94,17 +94,17 @@ describe('DocViewerComponent', () => {
 
       expect(renderSpy).not.toHaveBeenCalled();
 
-      docViewer.doc = {contents: 'Some content', id: 'some-id'};
+      docViewer.doc = { contents: 'Some content', id: 'some-id' };
       safeFlushAsapScheduler();
       expect(renderSpy).toHaveBeenCalledTimes(1);
 
       docViewer.ngOnDestroy();
 
-      docViewer.doc = {contents: 'Other content', id: 'other-id'};
+      docViewer.doc = { contents: 'Other content', id: 'other-id' };
       safeFlushAsapScheduler();
       expect(renderSpy).toHaveBeenCalledTimes(1);
 
-      docViewer.doc = {contents: 'More content', id: 'more-id'};
+      docViewer.doc = { contents: 'More content', id: 'more-id' };
       safeFlushAsapScheduler();
       expect(renderSpy).toHaveBeenCalledTimes(1);
     });
@@ -187,8 +187,8 @@ describe('DocViewerComponent', () => {
         spyOn(targetEl, 'querySelector').and.callFake((selector: string) => {
           const elem = querySelector.call(targetEl, selector);
           return elem && Object.defineProperties(elem, {
-            innerText: {value: undefined},
-            textContent: {value: 'Text Content'},
+            innerText: { value: undefined },
+            textContent: { value: 'Text Content' },
           });
         });
 
@@ -302,7 +302,7 @@ describe('DocViewerComponent', () => {
     let loadElementsSpy: jasmine.Spy;
 
     const doRender = (contents: string | null, id = 'foo') =>
-      docViewer.render({contents, id}).toPromise();
+      docViewer.render({ contents, id }).toPromise();
 
     beforeEach(() => {
       const elementsLoader = TestBed.inject(ElementsLoader) as Partial<ElementsLoader> as MockElementsLoader;
@@ -312,7 +312,7 @@ describe('DocViewerComponent', () => {
     });
 
     it('should return an `Observable`', () => {
-      expect(docViewer.render({contents: '', id: ''})).toEqual(jasmine.any(Observable));
+      expect(docViewer.render({ contents: '', id: '' })).toEqual(jasmine.any(Observable));
     });
 
     describe('(contents, title, ToC)', () => {
@@ -409,7 +409,7 @@ describe('DocViewerComponent', () => {
         const obs = new ObservableWithSubscriptionSpies();
         loadElementsSpy.and.returnValue(obs);
 
-        const renderObservable = docViewer.render({contents: 'Some content', id: 'foo'});
+        const renderObservable = docViewer.render({ contents: 'Some content', id: 'foo' });
         const subscription = renderObservable.subscribe();
 
         expect(obs.subscribeSpy).toHaveBeenCalledTimes(1);
@@ -444,7 +444,7 @@ describe('DocViewerComponent', () => {
         const obs = new ObservableWithSubscriptionSpies();
         swapViewsSpy.and.returnValue(obs);
 
-        const renderObservable = docViewer.render({contents: 'Hello, world!', id: 'foo'});
+        const renderObservable = docViewer.render({ contents: 'Hello, world!', id: 'foo' });
         const subscription = renderObservable.subscribe();
 
         expect(obs.subscribeSpy).toHaveBeenCalledTimes(1);

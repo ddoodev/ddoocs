@@ -31,7 +31,7 @@ describe('ElementsLoader', () => {
           ['element-a-selector', () => Promise.resolve(new FakeModuleFactory('element-a-module'))],
           ['element-b-selector', () => Promise.resolve(new FakeModuleFactory('element-b-module'))],
           ['element-c-selector', () => Promise.resolve(FakeCustomElementModule)]
-        ])},
+        ]) },
       ]
     });
 
@@ -255,7 +255,7 @@ class FakeComponentFactory extends ComponentFactory<any> {
   selector: string;
   componentType: Type<any>;
   ngContentSelectors: string[];
-  inputs = [{propName: this.identifyingInput, templateName: this.identifyingInput}];
+  inputs = [{ propName: this.identifyingInput, templateName: this.identifyingInput }];
   outputs = [];
 
   constructor(private identifyingInput: string) { super(); }
@@ -287,7 +287,9 @@ class FakeModuleRef extends NgModuleRef<WithCustomElementComponent> {
     this.injector.get.and.returnValue(this.componentFactoryResolver);
   }
 
+  /* eslint-disable-next-line @typescript-eslint/no-empty-function */
   destroy() {}
+  /* eslint-disable-next-line @typescript-eslint/no-empty-function */
   onDestroy(callback: () => void) {}
 }
 
@@ -304,6 +306,6 @@ class FakeModuleFactory extends NgModuleFactory<any> {
 
 function returnPromisesFromSpy(spy: jasmine.Spy): Deferred[] {
   const deferreds: Deferred[] = [];
-  spy.and.callFake(() => new Promise((resolve: any, reject) => deferreds.push({resolve, reject})));
+  spy.and.callFake(() => new Promise((resolve: any, reject) => deferreds.push({ resolve, reject })));
   return deferreds;
 }

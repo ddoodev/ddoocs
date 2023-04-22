@@ -58,5 +58,5 @@ function getDocType(doc) {
 
 const stabilityProperties = ['stable', 'experimental', 'deprecated'];
 function getStability(doc) {
-  return stabilityProperties.find(prop => doc.hasOwnProperty(prop)) || '';
+  return stabilityProperties.find(prop => prop in doc) || '';
 }

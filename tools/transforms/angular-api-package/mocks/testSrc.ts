@@ -22,7 +22,7 @@ export * from './importedSrc';
  * This is MyClass
  */
 export class MyClass {
-  message: String;
+  message: string;
 
   /**
    * Create a new MyClass

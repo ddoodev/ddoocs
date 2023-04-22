@@ -28,7 +28,7 @@ describe('DocumentService', () => {
     });
   }
 
-  function getServices(initialUrl: string = '') {
+  function getServices(initialUrl: string) {
     const injector = createInjector(initialUrl);
     httpMock = injector.get(HttpTestingController) as HttpTestingController;
     return {
@@ -73,11 +73,11 @@ describe('DocumentService', () => {
       docService.currentDocument.subscribe(doc => currentDocument = doc);
 
       // Initial request return 404.
-      httpMock.expectOne({}).flush(null, {status: 404, statusText: 'NOT FOUND'});
+      httpMock.expectOne({}).flush(null, { status: 404, statusText: 'NOT FOUND' });
       expect(logger.output.error).toEqual([
         [jasmine.any(Error)]
       ]);
-      expect(logger.output.error[0][0].message).toEqual(`Document file not found at 'missing/doc'`);
+      expect(logger.output.error[0][0].message).toEqual('Document file not found at \'missing/doc\'');
 
       // Subsequent request for not-found document.
       logger.output.error = [];
@@ -94,7 +94,7 @@ describe('DocumentService', () => {
 
       docService.currentDocument.subscribe(doc => currentDocument = doc);
 
-      httpMock.expectOne({}).flush(null, { status: 404, statusText: 'NOT FOUND'});
+      httpMock.expectOne({}).flush(null, { status: 404, statusText: 'NOT FOUND' });
       expect(currentDocument).toEqual(hardCodedNotFoundDoc);
 
       // now check that we haven't killed the currentDocument observable sequence
@@ -111,13 +111,13 @@ describe('DocumentService', () => {
 
       docService.currentDocument.subscribe(doc => latestDocument = doc);
 
-      httpMock.expectOne({}).flush(null, {status: 500, statusText: 'Server Error'});
+      httpMock.expectOne({}).flush(null, { status: 500, statusText: 'Server Error' });
       expect(latestDocument.id).toEqual(FETCHING_ERROR_ID);
       expect(logger.output.error).toEqual([
         [jasmine.any(Error)]
       ]);
       expect(logger.output.error[0][0].message)
-          .toEqual(`Error fetching document 'initial/doc': (Http failure response for generated/docs/initial/doc.json: 500 Server Error)`);
+          .toEqual('Error fetching document \'initial/doc\': (Http failure response for generated/docs/initial/doc.json: 500 Server Error)');
 
       locationService.go('new/doc');
       httpMock.expectOne({}).flush(doc1);
@@ -180,7 +180,7 @@ describe('DocumentService', () => {
 
   describe('computeMap', () => {
     it('should map the "empty" location to the correct document request', () => {
-      const { docService } = getServices();
+      const { docService } = getServices('');
       docService.currentDocument.subscribe();
 
       httpMock.expectOne(CONTENT_URL_PREFIX + 'index.json');

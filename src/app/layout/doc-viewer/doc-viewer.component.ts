@@ -177,7 +177,7 @@ export class DocViewerComponent implements OnDestroy {
    * entering animation has been completed. This is useful for work that needs to be done as soon as
    * the element has been attached to the DOM.
    */
-  protected swapViews(onInsertedCb = () => {}): Observable<void> {
+  protected swapViews(onInsertedCb: () => unknown): Observable<void> {
     const raf$ = new Observable<void>(subscriber => {
       const rafId = requestAnimationFrame(() => {
         subscriber.next();
@@ -255,7 +255,7 @@ export class DocViewerComponent implements OnDestroy {
 
     if (description) {
       const formattedDescription = description.replace(/<\/?\w*>/gm, '');
-      this.metaService.updateTag({ name: 'twitter:description', content: formattedDescription});
+      this.metaService.updateTag({ name: 'twitter:description', content: formattedDescription });
       this.metaService.updateTag({ property: 'og:description', content: formattedDescription });
     }
   }

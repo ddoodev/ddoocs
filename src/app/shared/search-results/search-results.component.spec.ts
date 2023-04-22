@@ -22,10 +22,10 @@ describe('SearchResultsComponent', () => {
     ]
     // fill it out to exceed 10 guide pages
     .concat('nmlkjihgfe'.split('').map(l => {
-      return { path: 'guide/' + l, title: 'Guide ' + l};
+      return { path: 'guide/' + l, title: 'Guide ' + l };
     }))
     // add these empty fields to satisfy interface
-    .map(r => ({...{ keywords: '', titleWords: '', type: '' }, ...r }));
+    .map(r => ({ ...{ keywords: '', titleWords: '', type: '' }, ...r }));
 
     return take === undefined ? results : results.slice(0, take);
   }
@@ -35,7 +35,7 @@ describe('SearchResultsComponent', () => {
   }
 
   function setSearchResults(query: string, results: SearchResult[]) {
-    component.searchResults = {query, results};
+    component.searchResults = { query, results };
     component.ngOnChanges();
     fixture.detectChanges();
   }
@@ -148,25 +148,25 @@ describe('SearchResultsComponent', () => {
     });
 
     it('should emit a "resultSelected" event', () => {
-      anchor.triggerEventHandler('click', {button: 0, ctrlKey: false, metaKey: false});
+      anchor.triggerEventHandler('click', { button: 0, ctrlKey: false, metaKey: false });
       fixture.detectChanges();
       expect(selected).toBe(searchResult);
     });
 
     it('should not emit an event if mouse button is not zero (middle or right)', () => {
-      anchor.triggerEventHandler('click', {button: 1, ctrlKey: false, metaKey: false});
+      anchor.triggerEventHandler('click', { button: 1, ctrlKey: false, metaKey: false });
       fixture.detectChanges();
       expect(selected).toBeNull();
     });
 
     it('should not emit an event if the `ctrl` key is pressed', () => {
-      anchor.triggerEventHandler('click', {button: 0, ctrlKey: true, metaKey: false});
+      anchor.triggerEventHandler('click', { button: 0, ctrlKey: true, metaKey: false });
       fixture.detectChanges();
       expect(selected).toBeNull();
     });
 
     it('should not emit an event if the `meta` key is pressed', () => {
-      anchor.triggerEventHandler('click', {button: 0, ctrlKey: false, metaKey: true});
+      anchor.triggerEventHandler('click', { button: 0, ctrlKey: false, metaKey: true });
       fixture.detectChanges();
       expect(selected).toBeNull();
     });

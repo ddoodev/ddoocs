@@ -32,8 +32,10 @@ export class SearchBoxComponent implements OnInit {
   private searchDebounce = 300;
   private searchSubject = new Subject<string>();
 
-  @ViewChild('searchBox', {static: true}) searchBox: ElementRef;
+  @ViewChild('searchBox', { static: true }) searchBox: ElementRef;
+  /* eslint-disable-next-line @angular-eslint/no-output-on-prefix */
   @Output() onSearch = this.searchSubject.pipe(distinctUntilChanged(), debounceTime(this.searchDebounce));
+  /* eslint-disable-next-line @angular-eslint/no-output-on-prefix */
   @Output() onFocus = new EventEmitter<string>();
 
   constructor(private locationService: LocationService) { }

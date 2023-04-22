@@ -80,17 +80,17 @@ describe('ApiListComponent', () => {
       });
 
       it('should be visible if they have the selected stability status', () => {
-        component.setStatus({value: 'stable', title: 'Stable'});
+        component.setStatus({ value: 'stable', title: 'Stable' });
         expectFilteredResult('status: stable', item => item.stability === 'stable');
       });
 
       it('should be visible if they have the selected security status', () => {
-        component.setStatus({value: 'security-risk', title: 'Security Risk'});
+        component.setStatus({ value: 'security-risk', title: 'Security Risk' });
         expectFilteredResult('status: security-risk', item => item.securityRisk);
       });
 
       it('should be visible if they match the selected API type', () => {
-        component.setType({value: 'class', title: 'Class'});
+        component.setType({ value: 'class', title: 'Class' });
         expectFilteredResult('type: class', item => item.docType === 'class');
       });
     });
@@ -130,17 +130,17 @@ describe('ApiListComponent', () => {
     }
 
     it('should filter as expected for ?query', () => {
-      locationService.query = {query: '_3'};
+      locationService.query = { query: '_3' };
       expectOneItem('class_3', 'core', 'class', 'experimental');
     });
 
     it('should filter as expected for ?status', () => {
-      locationService.query = {status: 'deprecated'};
+      locationService.query = { status: 'deprecated' };
       expectOneItem('function_1', 'core', 'function', 'deprecated');
     });
 
     it('should filter as expected when status is security-risk', () => {
-      locationService.query = {status: 'security-risk'};
+      locationService.query = { status: 'security-risk' };
       fixture.detectChanges();
       expectFilteredResult('security-risk', item => item.securityRisk);
     });
@@ -192,8 +192,8 @@ describe('ApiListComponent', () => {
 
     it('should have query, status, and type', () => {
       component.setQuery('foo');
-      component.setStatus({value: 'stable', title: 'Stable'});
-      component.setType({value: 'class', title: 'Class'});
+      component.setStatus({ value: 'stable', title: 'Stable' });
+      component.setType({ value: 'class', title: 'Class' });
 
       const search = locationService.setSearch.calls.mostRecent().args[1];
       expect(search.query).toBe('foo');
@@ -216,77 +216,77 @@ class TestApiService {
   sections = this.sectionsSubject.asObservable();
 }
 
-// tslint:disable:quotemark
+/* eslint-disable @typescript-eslint/quotes */
 const apiSections: ApiSection[] = [
   {
-    "name": "common",
-    "title": "common",
-    "titleShort": "common",
-    "path": "api/common",
-    "deprecated": false,
-    "items": [
+    'name': 'common',
+    'title': 'common',
+    'titleShort': 'common',
+    'path': 'api/common',
+    'deprecated': false,
+    'items': [
       {
-        "name": "class_1",
-        "title": "Class 1",
-        "path": "api/common/class_1",
-        "docType": "class",
-        "stability": "experimental",
-        "securityRisk": false,
-        "pkg": "common",
+        'name': 'class_1',
+        'title': 'Class 1',
+        'path': 'api/common/class_1',
+        'docType': 'class',
+        'stability': 'experimental',
+        'securityRisk': false,
+        'pkg': 'common',
       },
       {
-        "name": "class_2",
-        "title": "Class 2",
-        "path": "api/common/class_2",
-        "docType": "class",
-        "stability": "stable",
-        "securityRisk": false,
-        "pkg": "common",
+        'name': 'class_2',
+        'title': 'Class 2',
+        'path': 'api/common/class_2',
+        'docType': 'class',
+        'stability': 'stable',
+        'securityRisk': false,
+        'pkg': 'common',
       },
       {
-        "name": "directive_1",
-        "title": "Directive 1",
-        "path": "api/common/directive_1",
-        "docType": "directive",
-        "stability": "stable",
-        "securityRisk": true,
-        "pkg": "common",
+        'name': 'directive_1',
+        'title': 'Directive 1',
+        'path': 'api/common/directive_1',
+        'docType': 'directive',
+        'stability': 'stable',
+        'securityRisk': true,
+        'pkg': 'common',
       }
     ]
   },
   {
-    "name": "core",
-    "title": "core",
-    "titleShort": "core",
-    "path": "api/core",
-    "deprecated": false,
-    "items": [
+    'name': 'core',
+    'title': 'core',
+    'titleShort': 'core',
+    'path': 'api/core',
+    'deprecated': false,
+    'items': [
       {
-        "name": "class_3",
-        "title": "Class 3",
-        "path": "api/core/class_3",
-        "docType": "class",
-        "stability": "experimental",
-        "securityRisk": false,
-        "pkg": "core",
+        'name': 'class_3',
+        'title': 'Class 3',
+        'path': 'api/core/class_3',
+        'docType': 'class',
+        'stability': 'experimental',
+        'securityRisk': false,
+        'pkg': 'core',
       },
       {
-        "name": "function_1",
-        "title": "Function 1",
-        "path": "api/core/function 1",
-        "docType": "function",
-        "stability": "deprecated",
-        "securityRisk": true,
-        "pkg": "core",
+        'name': 'function_1',
+        'title': 'Function 1',
+        'path': 'api/core/function 1',
+        'docType': 'function',
+        'stability': 'deprecated',
+        'securityRisk': true,
+        'pkg': 'core',
       },
       {
-        "name": "const_1",
-        "title": "Const 1",
-        "path": "api/core/const_1",
-        "docType": "const",
-        "stability": "stable",
-        "securityRisk": false,
-        "pkg": "core",
+        'name': 'const_1',
+        'title': 'Const 1',
+        'path': 'api/core/const_1',
+        'docType': 'const',
+        'stability': 'stable',
+        'securityRisk': false,
+        'pkg': 'core',
       }
     ]
   }

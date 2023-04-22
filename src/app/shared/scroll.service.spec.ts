@@ -26,7 +26,7 @@ describe('ScrollService', () => {
 
   class MockElement {
     getBoundingClientRect = jasmine.createSpy('Element getBoundingClientRect')
-                                   .and.returnValue({top: 0});
+                                   .and.returnValue({ top: 0 });
     scrollIntoView = jasmine.createSpy('Element scrollIntoView');
   }
 
@@ -82,7 +82,7 @@ describe('ScrollService', () => {
     });
 
     it('should be calculated based on the top-bar\'s height + margin', () => {
-      (document.querySelector as jasmine.Spy).and.returnValue({clientHeight: 50});
+      (document.querySelector as jasmine.Spy).and.returnValue({ clientHeight: 50 });
       expect(scrollService.topOffset).toBe(50 + topMargin);
     });
 
@@ -96,7 +96,7 @@ describe('ScrollService', () => {
 
     it('should retrieve the top-bar\'s height again after resize', () => {
       let clientHeight = 50;
-      (document.querySelector as jasmine.Spy).and.callFake(() => ({clientHeight}));
+      (document.querySelector as jasmine.Spy).and.callFake(() => ({ clientHeight }));
 
       expect(scrollService.topOffset).toBe(50 + topMargin);
       expect(document.querySelector).toHaveBeenCalled();
@@ -193,12 +193,12 @@ describe('ScrollService', () => {
       const getBoundingClientRect = element.getBoundingClientRect as jasmine.Spy;
       const topOffset = scrollService.topOffset;
 
-      getBoundingClientRect.and.returnValue({top: topOffset + 100});
+      getBoundingClientRect.and.returnValue({ top: topOffset + 100 });
       scrollService.scrollToElement(element);
       expect(element.scrollIntoView).toHaveBeenCalledTimes(1);
       expect(window.scrollBy).toHaveBeenCalledWith(0, 100);
 
-      getBoundingClientRect.and.returnValue({top: topOffset - 10});
+      getBoundingClientRect.and.returnValue({ top: topOffset - 10 });
       scrollService.scrollToElement(element);
       expect(element.scrollIntoView).toHaveBeenCalledTimes(2);
       expect(window.scrollBy).toHaveBeenCalledWith(0, -10);
@@ -260,7 +260,7 @@ describe('ScrollService', () => {
       if (scrollService.supportManualScrollRestoration) {
         location.go('/initial-url1');
         // We simulate a scroll down
-        location.replaceState('/initial-url1', 'hack', {scrollPosition: [2000, 0]});
+        location.replaceState('/initial-url1', 'hack', { scrollPosition: [2000, 0] });
         location.go('/initial-url2');
         location.back();
 
@@ -284,7 +284,7 @@ describe('ScrollService', () => {
         location.go('/initial-url1');
         location.go('/initial-url2');
         // We simulate a scroll down
-        location.replaceState('/initial-url1', 'hack', {scrollPosition: [2000, 0]});
+        location.replaceState('/initial-url1', 'hack', { scrollPosition: [2000, 0] });
 
         location.back();
         scrollService.poppedStateScrollPosition = [0, 0];

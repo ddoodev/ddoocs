@@ -9,11 +9,11 @@ import { WindowToken } from 'app/shared/window';
 describe('NotificationComponent', () => {
   let component: NotificationComponent;
   let fixture: ComponentFixture<TestComponent>;
- 
+
   const token = {
     localStorage: jasmine.createSpyObj('localStorage', ['getItem', 'setItem'])
   };
-  
+
   function configTestingModule(now = new Date('2018-01-20')) {
     TestBed.configureTestingModule({
       declarations: [TestComponent, NotificationComponent],
@@ -89,17 +89,17 @@ describe('NotificationComponent', () => {
     configTestingModule();
     createComponent();
     const setItemSpy: jasmine.Spy = token.localStorage.setItem;
-    setItemSpy.and.returnValue(`aio-notification/1/hide`);
+    setItemSpy.and.returnValue('aio-notification/1/hide');
     expect(component.showNotification).toBe('show');
     component.dismiss();
     fixture.detectChanges();
     expect(component.showNotification).toBe('hide');
   });
 
-  it('should update localStorage key when dismiss is called', inject([WindowToken], (windowToken: { localStorage: {setItem: () => {}, getItem: () => {}}}) => {
+  it('should update localStorage key when dismiss is called', inject([WindowToken], (windowToken: { localStorage: {setItem: () => any, getItem: () => any}}) => {
     configTestingModule();
     createComponent();
-    
+
     const setItemSpy: jasmine.Spy = spyOn(windowToken.localStorage, 'setItem');
     component.dismiss();
     expect(setItemSpy).toHaveBeenCalledWith('aio-notification/survey-january-2018', 'hide');
@@ -111,7 +111,7 @@ describe('NotificationComponent', () => {
     expect(component.showNotification).toBe('hide');
   });
 
-  it('should not show the notification if the there is a "hide" flag in localStorage', inject([WindowToken], (windowToken: { localStorage: { setItem: () => {}, getItem: () => {}}}) => {
+  it('should not show the notification if the there is a "hide" flag in localStorage', inject([WindowToken], (windowToken: { localStorage: { setItem: () => any, getItem: () => any}}) => {
     configTestingModule();
     const getItemSpy: jasmine.Spy = spyOn(windowToken.localStorage, 'getItem');
     getItemSpy.and.returnValue('hide');

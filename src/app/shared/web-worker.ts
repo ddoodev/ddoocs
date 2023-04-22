@@ -4,8 +4,8 @@ Use of this source code is governed by an MIT-style license that
 can be found in the LICENSE file at http://angular.io/license
 */
 
-import {NgZone} from '@angular/core';
-import {Observable} from 'rxjs';
+import { NgZone } from '@angular/core';
+import { Observable } from 'rxjs';
 
 export interface WebWorkerMessage {
   type: string;
@@ -30,7 +30,7 @@ export class WebWorkerClient {
       const id = this.nextId++;
 
       const handleMessage = (response: MessageEvent) => {
-        const {type: responseType, id: responseId, payload: responsePayload} = response.data as WebWorkerMessage;
+        const { type: responseType, id: responseId, payload: responsePayload } = response.data as WebWorkerMessage;
         if (type === responseType && id === responseId) {
           this.zone.run(() => {
             subscriber.next(responsePayload);
@@ -49,7 +49,7 @@ export class WebWorkerClient {
       this.worker.addEventListener('error', handleError);
 
       // Post the message to the web worker
-      this.worker.postMessage({type, id, payload});
+      this.worker.postMessage({ type, id, payload });
 
       // At completion/error unwire the event listeners
       return () => {

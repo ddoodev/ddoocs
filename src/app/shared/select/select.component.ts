@@ -35,7 +35,7 @@ export class SelectComponent implements OnInit {
   options: Option[];
 
   @Output()
-  change = new EventEmitter<{ option: Option; index: number }>();
+  changeEmitter = new EventEmitter<{ option: Option; index: number }>();
 
   @Input()
   showSymbol = false;
@@ -61,7 +61,7 @@ export class SelectComponent implements OnInit {
 
   select(option: Option, index: number) {
     this.selected = option;
-    this.change.emit({ option, index });
+    this.changeEmitter.emit({ option, index });
     this.hideOptions();
   }
 

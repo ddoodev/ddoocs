@@ -48,7 +48,7 @@ module.exports = function processClassLikeMembers() {
 };
 
 function isMethod(doc) {
-  return doc.hasOwnProperty('parameters') && !doc.isGetAccessor && !doc.isSetAccessor;
+  return 'parameters' in doc && !doc.isGetAccessor && !doc.isSetAccessor;
 }
 
 function computeMemberDescription(member) {

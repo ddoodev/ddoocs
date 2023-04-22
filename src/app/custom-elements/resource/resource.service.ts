@@ -18,7 +18,6 @@ export class ResourceService {
   }
 
   private getCategories(): Observable<Category[]> {
-
     const categories = this.http.get<any>(resourcesPath).pipe(
       map(data => mkCategories(data)),
       publishLast(),
@@ -26,7 +25,7 @@ export class ResourceService {
 
     (categories as ConnectableObservable<Category[]>).connect();
     return categories;
-  };
+  }
 }
 
 // Extract sorted Category[] from resource JSON data

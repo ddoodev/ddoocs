@@ -1,32 +1,32 @@
-import {DebugElement, NO_ERRORS_SCHEMA} from '@angular/core';
-import {ComponentFixture, fakeAsync, flushMicrotasks, inject, TestBed, tick} from '@angular/core/testing';
-import {By, Title} from '@angular/platform-browser';
-import {APP_BASE_HREF} from '@angular/common';
-import {HttpClient} from '@angular/common/http';
-import {MatProgressBar} from '@angular/material/progress-bar';
-import {MatSidenav} from '@angular/material/sidenav';
+import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
+import { ComponentFixture, fakeAsync, flushMicrotasks, inject, TestBed, tick } from '@angular/core/testing';
+import { By, Title } from '@angular/platform-browser';
+import { APP_BASE_HREF } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { MatSidenav } from '@angular/material/sidenav';
 
-import {of, timer} from 'rxjs';
-import {first, mapTo} from 'rxjs/operators';
+import { of, timer } from 'rxjs';
+import { first, mapTo } from 'rxjs/operators';
 
-import {AppComponent} from './app.component';
-import {AppModule} from './app.module';
-import {DocumentService} from 'app/documents/document.service';
-import {DocViewerComponent} from 'app/layout/doc-viewer/doc-viewer.component';
-import {Deployment} from 'app/shared/deployment.service';
-import {LocationService} from 'app/shared/location.service';
-import {Logger} from 'app/shared/logger.service';
-import {MockLocationService} from 'testing/location.service';
-import {MockLogger} from 'testing/logger.service';
-import {MockSearchService} from 'testing/search.service';
-import {NavigationNode} from 'app/navigation/navigation.service';
-import {ScrollService} from 'app/shared/scroll.service';
-import {SearchBoxComponent} from 'app/search/search-box/search-box.component';
-import {SearchResultsComponent} from 'app/shared/search-results/search-results.component';
-import {SearchService} from 'app/search/search.service';
-import {SelectComponent} from 'app/shared/select/select.component';
-import {TocItem, TocService} from 'app/shared/toc.service';
-import {ElementsLoader} from './custom-elements/elements-loader';
+import { AppComponent } from './app.component';
+import { AppModule } from './app.module';
+import { DocumentService } from 'app/documents/document.service';
+import { DocViewerComponent } from 'app/layout/doc-viewer/doc-viewer.component';
+import { Deployment } from 'app/shared/deployment.service';
+import { LocationService } from 'app/shared/location.service';
+import { Logger } from 'app/shared/logger.service';
+import { MockLocationService } from 'testing/location.service';
+import { MockLogger } from 'testing/logger.service';
+import { MockSearchService } from 'testing/search.service';
+import { NavigationNode } from 'app/navigation/navigation.service';
+import { ScrollService } from 'app/shared/scroll.service';
+import { SearchBoxComponent } from 'app/search/search-box/search-box.component';
+import { SearchResultsComponent } from 'app/shared/search-results/search-results.component';
+import { SearchService } from 'app/search/search.service';
+import { SelectComponent } from 'app/shared/select/select.component';
+import { TocItem, TocService } from 'app/shared/toc.service';
+import { ElementsLoader } from './custom-elements/elements-loader';
 
 const sideBySideBreakPoint = 992;
 const hideToCBreakPoint = 800;
@@ -404,7 +404,7 @@ describe('AppComponent', () => {
         await setupSelectorForTesting();
         const versionWithUrlIndex = component.docVersions.findIndex(v => !!v.url);
         const versionWithUrl = component.docVersions[versionWithUrlIndex];
-        selectElement.triggerEventHandler('change', { option: versionWithUrl, index: versionWithUrlIndex});
+        selectElement.triggerEventHandler('change', { option: versionWithUrl, index: versionWithUrlIndex });
         expect(locationService.go).toHaveBeenCalledWith(versionWithUrl.url);
       });
 
@@ -592,7 +592,7 @@ describe('AppComponent', () => {
       };
 
       it('should prevent scrolling up if already at the top', () => {
-        const elem = {scrollTop: 0};
+        const elem = { scrollTop: 0 };
 
         expect(preventedScrolling(elem, -100)).toBe(true);
         expect(preventedScrolling(elem, +100)).toBe(false);
@@ -600,7 +600,7 @@ describe('AppComponent', () => {
       });
 
       it('should prevent scrolling down if already at the bottom', () => {
-        const elem = {scrollTop: 100, scrollHeight: 150, clientHeight: 50};
+        const elem = { scrollTop: 100, scrollHeight: 150, clientHeight: 50 };
 
         expect(preventedScrolling(elem, +10)).toBe(true);
         expect(preventedScrolling(elem, -10)).toBe(false);
@@ -617,7 +617,7 @@ describe('AppComponent', () => {
       });
 
       it('should not prevent scrolling if neither at the top nor at the bottom', () => {
-        const elem = {scrollTop: 50, scrollHeight: 150, clientHeight: 50};
+        const elem = { scrollTop: 50, scrollHeight: 150, clientHeight: 50 };
 
         expect(preventedScrolling(elem, +100)).toBe(false);
         expect(preventedScrolling(elem, -100)).toBe(false);
@@ -674,7 +674,7 @@ describe('AppComponent', () => {
         setHasFloatingToc(true);
         expect(restrainScrolling).not.toHaveBeenCalled();
 
-        tocContainer!.dispatchEvent(evt);
+        tocContainer?.dispatchEvent(evt);
         expect(restrainScrolling).toHaveBeenCalledWith(evt);
       });
 
@@ -706,7 +706,7 @@ describe('AppComponent', () => {
         createTestingModule('a/b', 'stable');
         await initializeTest();
         const banner: HTMLElement = fixture.debugElement.query(By.css('aio-mode-banner')).nativeElement;
-        expect(banner.textContent!.trim()).toEqual('');
+        expect(banner.textContent?.trim()).toEqual('');
       });
     });
 
@@ -728,7 +728,7 @@ describe('AppComponent', () => {
 
         it('should clear "only" the search query param from the URL', () => {
           // Mock out the current state of the URL query params
-          locationService.search.and.returnValue({ a: 'some-A', b: 'some-B', search: 'some-C'});
+          locationService.search.and.returnValue({ a: 'some-A', b: 'some-B', search: 'some-C' });
           // docViewer is a commonly-clicked, non-search element
           docViewer.click();
           // Check that the query params were updated correctly
@@ -1296,7 +1296,7 @@ describe('AppComponent', () => {
 
 //// test helpers ////
 
-function createTestingModule(initialUrl: string, mode: string = 'stable') {
+function createTestingModule(initialUrl: string, mode = 'stable') {
   const mockLocationService = new MockLocationService(initialUrl);
   TestBed.resetTestingModule();
   TestBed.configureTestingModule({
@@ -1312,7 +1312,7 @@ function createTestingModule(initialUrl: string, mode: string = 'stable') {
         const deployment = new Deployment(mockLocationService as any);
         deployment.mode = mode;
         return deployment;
-      }},
+      } },
     ]
   });
 }
@@ -1346,44 +1346,44 @@ class TestHttpClient {
     { title: 'v2', url: 'https://v2.angular.io' }
   ];
 
-  // tslint:disable:quotemark
+  /* eslint-disable @typescript-eslint/quotes */
   navJson = {
-    "TopBar": [
+    'TopBar': [
       {
-        "url": "features",
-        "title": "Features"
+        'url': 'features',
+        'title': 'Features'
       },
       {
-        "url": "no-title",
-        "title": "No Title"
+        'url': 'no-title',
+        'title': 'No Title'
       },
     ],
-    "SideNav": [
+    'SideNav': [
       {
-      "title": "Core",
-      "tooltip": "Learn the core capabilities of Angular",
-      "children": [
+      'title': 'Core',
+      'tooltip': 'Learn the core capabilities of Angular',
+      'children': [
           {
-            "url": "guide/pipes",
-            "title": "Pipes",
-            "tooltip": "Pipes transform displayed values within a template."
+            'url': 'guide/pipes',
+            'title': 'Pipes',
+            'tooltip': 'Pipes transform displayed values within a template.'
           },
           {
-            "url": "guide/bags",
-            "title": "Bags",
-            "tooltip": "Pack your bags for a code adventure."
+            'url': 'guide/bags',
+            'title': 'Bags',
+            'tooltip': 'Pack your bags for a code adventure.'
           }
         ]
       },
       {
-        "url": "api",
-        "title": "API",
-        "tooltip": "Details of the Angular classes and values."
+        'url': 'api',
+        'title': 'API',
+        'tooltip': 'Details of the Angular classes and values.'
       }
     ],
-    "docVersions": TestHttpClient.docVersions,
+    'docVersions': TestHttpClient.docVersions,
 
-    "__versionInfo": TestHttpClient.versionInfo,
+    '__versionInfo': TestHttpClient.versionInfo,
   };
 
   get(url: string) {
@@ -1391,8 +1391,8 @@ class TestHttpClient {
     if (/navigation\.json/.test(url)) {
       data = this.navJson;
     } else {
-      const match = /generated\/docs\/(.+)\.json/.exec(url)!;
-      const id = match[1]!;
+      const match = /generated\/docs\/(.+)\.json/.exec(url) as RegExpExecArray;
+      const id = match[1];
       // Make up a title for test purposes
       const title = id.split('/').pop()!.replace(/^([a-z])/, (_, letter) => letter.toUpperCase());
       const h1 = (id === 'no-title') ? '' : `<h1 class="no-toc">${title}</h1>`;

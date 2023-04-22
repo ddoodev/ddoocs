@@ -169,7 +169,7 @@ export class ScrollService {
     if (this.supportManualScrollRestoration) {
       const currentScrollPosition = this.viewportScroller.getScrollPosition();
       if (currentScrollPosition) {
-        this.location.replaceState(this.location.path(true), undefined, {scrollPosition: currentScrollPosition});
+        this.location.replaceState(this.location.path(true), undefined, { scrollPosition: currentScrollPosition });
         window.sessionStorage.setItem('scrollPosition', currentScrollPosition.join(','));
       }
     }

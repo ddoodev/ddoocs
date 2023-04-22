@@ -20,7 +20,7 @@ class SearchCriteria {
   query ?= '';
   status ?= 'all';
   type ?= 'all';
-  pkg ?= 'discordoo'
+  pkg ?= 'discordoo';
 }
 
 @Component({
@@ -39,14 +39,14 @@ export class ApiListComponent implements OnInit {
 
   status: Option;
   type: Option;
-  pkg: Option
+  pkg: Option;
 
   pkgs: Option[] = [
-    { value: 'all', title: 'All'},
+    { value: 'all', title: 'All' },
     { value: 'discordoo', title: 'Discordoo' },
-    { value: 'collection', title: 'Collection'},
-    { value: 'providers', title: 'Providers'}
-  ]
+    { value: 'collection', title: 'Collection' },
+    { value: 'providers', title: 'Providers' }
+  ];
 
   // API types
   types: Option[] = [
@@ -97,9 +97,9 @@ export class ApiListComponent implements OnInit {
   }
 
   setPackage(pkg: Option) {
-    this.togglePackageMenu()
-    this.pkg = pkg
-    this.setSearchCriteria({ pkg: pkg.value })
+    this.togglePackageMenu();
+    this.pkg = pkg;
+    this.setSearchCriteria({ pkg: pkg.value });
   }
 
   toggleStatusMenu() {
@@ -151,7 +151,7 @@ export class ApiListComponent implements OnInit {
 
     this.status = this.statuses.find((x) => x.value === status) || this.statuses[0];
     this.type = this.types.find((x) => x.value === type) || this.types[0];
-    this.pkg = this.pkgs.find((x) => x.value === pkg) || this.pkgs[0]
+    this.pkg = this.pkgs.find((x) => x.value === pkg) || this.pkgs[0];
 
     this.searchCriteria = {
       query: q,

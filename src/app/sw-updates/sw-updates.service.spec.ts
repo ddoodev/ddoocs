@@ -77,7 +77,7 @@ describe('SwUpdatesService', () => {
     appRef.isStable.next(true);
     expect(swu.activateUpdate).not.toHaveBeenCalled();
 
-    swu.$$availableSubj.next({available: {hash: 'foo'}});
+    swu.$$availableSubj.next({ available: { hash: 'foo' } });
     expect(swu.activateUpdate).toHaveBeenCalled();
   })));
 
@@ -88,7 +88,7 @@ describe('SwUpdatesService', () => {
     tick(checkInterval);
     expect(swu.checkForUpdate).toHaveBeenCalledTimes(1);
 
-    swu.$$availableSubj.next({available: {hash: 'foo'}});
+    swu.$$availableSubj.next({ available: { hash: 'foo' } });
 
     tick(checkInterval);
     expect(swu.checkForUpdate).toHaveBeenCalledTimes(2);
@@ -103,10 +103,10 @@ describe('SwUpdatesService', () => {
     const activatedVersions: (string|undefined)[] = [];
     service.updateActivated.subscribe(v => activatedVersions.push(v));
 
-    swu.$$availableSubj.next({available: {hash: 'foo'}});
-    swu.$$activatedSubj.next({current: {hash: 'bar'}});
-    swu.$$availableSubj.next({available: {hash: 'baz'}});
-    swu.$$activatedSubj.next({current: {hash: 'qux'}});
+    swu.$$availableSubj.next({ available: { hash: 'foo' } });
+    swu.$$activatedSubj.next({ current: { hash: 'bar' } });
+    swu.$$availableSubj.next({ available: { hash: 'baz' } });
+    swu.$$activatedSubj.next({ current: { hash: 'qux' } });
 
     expect(activatedVersions).toEqual(['bar', 'qux']);
   }));
@@ -120,8 +120,8 @@ describe('SwUpdatesService', () => {
       tick(checkInterval);
       tick(checkInterval);
 
-      swu.$$availableSubj.next({available: {hash: 'foo'}});
-      swu.$$activatedSubj.next({current: {hash: 'bar'}});
+      swu.$$availableSubj.next({ available: { hash: 'foo' } });
+      swu.$$activatedSubj.next({ current: { hash: 'bar' } });
 
       tick(checkInterval);
       tick(checkInterval);
@@ -130,7 +130,7 @@ describe('SwUpdatesService', () => {
     })));
 
     it('should not activate available updates', fakeAsync(runDeactivated(() => {
-      swu.$$availableSubj.next({available: {hash: 'foo'}});
+      swu.$$availableSubj.next({ available: { hash: 'foo' } });
       expect(swu.activateUpdate).not.toHaveBeenCalled();
     })));
 
@@ -138,10 +138,10 @@ describe('SwUpdatesService', () => {
       const activatedVersions: (string|undefined)[] = [];
       service.updateActivated.subscribe(v => activatedVersions.push(v));
 
-      swu.$$availableSubj.next({available: {hash: 'foo'}});
-      swu.$$activatedSubj.next({current: {hash: 'bar'}});
-      swu.$$availableSubj.next({available: {hash: 'baz'}});
-      swu.$$activatedSubj.next({current: {hash: 'qux'}});
+      swu.$$availableSubj.next({ available: { hash: 'foo' } });
+      swu.$$activatedSubj.next({ current: { hash: 'bar' } });
+      swu.$$availableSubj.next({ available: { hash: 'baz' } });
+      swu.$$activatedSubj.next({ current: { hash: 'qux' } });
 
       expect(activatedVersions).toEqual([]);
     }));
@@ -168,8 +168,8 @@ describe('SwUpdatesService', () => {
       service.ngOnDestroy();
       swu.checkForUpdate.calls.reset();
 
-      swu.$$availableSubj.next({available: {hash: 'foo'}});
-      swu.$$activatedSubj.next({current: {hash: 'baz'}});
+      swu.$$availableSubj.next({ available: { hash: 'foo' } });
+      swu.$$activatedSubj.next({ current: { hash: 'baz' } });
 
       tick(checkInterval);
       tick(checkInterval);
@@ -179,7 +179,7 @@ describe('SwUpdatesService', () => {
 
     it('should not activate available updates', fakeAsync(run(() => {
       service.ngOnDestroy();
-      swu.$$availableSubj.next({available: {hash: 'foo'}});
+      swu.$$availableSubj.next({ available: { hash: 'foo' } });
 
       expect(swu.activateUpdate).not.toHaveBeenCalled();
     })));
@@ -188,11 +188,11 @@ describe('SwUpdatesService', () => {
       const activatedVersions: (string|undefined)[] = [];
       service.updateActivated.subscribe(v => activatedVersions.push(v));
 
-      swu.$$availableSubj.next({available: {hash: 'foo'}});
-      swu.$$activatedSubj.next({current: {hash: 'bar'}});
+      swu.$$availableSubj.next({ available: { hash: 'foo' } });
+      swu.$$activatedSubj.next({ current: { hash: 'bar' } });
       service.ngOnDestroy();
-      swu.$$availableSubj.next({available: {hash: 'baz'}});
-      swu.$$activatedSubj.next({current: {hash: 'qux'}});
+      swu.$$availableSubj.next({ available: { hash: 'baz' } });
+      swu.$$activatedSubj.next({ current: { hash: 'qux' } });
 
       expect(activatedVersions).toEqual(['bar']);
     }));

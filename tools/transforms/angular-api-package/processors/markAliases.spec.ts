@@ -60,7 +60,7 @@ describe('markAliases processor', () => {
 
   it('should mark aliased exports and remove the aliased doc from a mock file', () => {
     const processor = markAliases(console);
-    let docs: DocCollection = [];
+    const docs: DocCollection = [];
     readTypescript.$process(docs);
     processor.$process(docs);
 
@@ -72,7 +72,7 @@ describe('markAliases processor', () => {
 
   it('should leave non duplicate exports unmarked', () => {
     const processor = markAliases(console);
-    let docs: DocCollection = [];
+    const docs: DocCollection = [];
     readTypescript.$process(docs);
     processor.$process(docs);
 

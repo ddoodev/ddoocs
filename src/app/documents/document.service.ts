@@ -58,7 +58,7 @@ export class DocumentService {
 
     this.logger.log('fetching document from', requestPath);
     this.http
-      .get<DocumentContents>(requestPath, {responseType: 'json'})
+      .get<DocumentContents>(requestPath, { responseType: 'json' })
       .pipe(
         tap(data => {
           if (!data || typeof data !== 'object') {

@@ -92,7 +92,7 @@ describe('SelectComponent', () => {
     });
 
     it('should select the current option when enter is pressed', () => {
-      const e = new KeyboardEvent('keydown', {bubbles: true, cancelable: true, key: 'Enter'});
+      const e = new KeyboardEvent('keydown', { bubbles: true, cancelable: true, key: 'Enter' });
       getOptions()[0].dispatchEvent(e);
       fixture.detectChanges();
       expect(host.onChange).toHaveBeenCalledWith({ option: options[0], index: 0 });
@@ -101,7 +101,7 @@ describe('SelectComponent', () => {
     });
 
     it('should select the current option when space is pressed', () => {
-      const e = new KeyboardEvent('keydown', {bubbles: true, cancelable: true, key: ' '});
+      const e = new KeyboardEvent('keydown', { bubbles: true, cancelable: true, key: ' ' });
       getOptions()[0].dispatchEvent(e);
       fixture.detectChanges();
       expect(host.onChange).toHaveBeenCalledWith({ option: options[0], index: 0 });
@@ -134,7 +134,7 @@ describe('SelectComponent', () => {
 
 @Component({
   template: `
-    <aio-select (change)="onChange($event)"
+    <aio-select (changeEmitter)="onChange($event)"
               [options]="options"
               [selected]="selected"
               [label]="label"

@@ -71,10 +71,10 @@ describe('TocService', () => {
       tocService.activeItemIndex.subscribe(i => indices.push(i));
       callGenToc();
 
-      scrollSpyService.$lastInfo.active.next({index: 42} as ScrollItem);
-      scrollSpyService.$lastInfo.active.next({index: 0} as ScrollItem);
+      scrollSpyService.$lastInfo.active.next({ index: 42 } as ScrollItem);
+      scrollSpyService.$lastInfo.active.next({ index: 0 } as ScrollItem);
       scrollSpyService.$lastInfo.active.next(null);
-      scrollSpyService.$lastInfo.active.next({index: 7} as ScrollItem);
+      scrollSpyService.$lastInfo.active.next({ index: 7 } as ScrollItem);
 
       expect(indices).toEqual([null, 42, 0, null, 7]);
     });
@@ -86,7 +86,7 @@ describe('TocService', () => {
 
       callGenToc();
       const unspy = scrollSpyService.$lastInfo.unspy;
-      scrollSpyService.$lastInfo.active.next({index: 42} as ScrollItem);
+      scrollSpyService.$lastInfo.active.next({ index: 42 } as ScrollItem);
 
       expect(unspy).not.toHaveBeenCalled();
       expect(indices).toEqual([null, 42]);
@@ -104,7 +104,7 @@ describe('TocService', () => {
 
       callGenToc();
       const unspy1 = scrollSpyService.$lastInfo.unspy;
-      scrollSpyService.$lastInfo.active.next({index: 1} as ScrollItem);
+      scrollSpyService.$lastInfo.active.next({ index: 1 } as ScrollItem);
 
       expect(unspy1).not.toHaveBeenCalled();
       expect(indices).toEqual([null, 1]);
@@ -116,13 +116,13 @@ describe('TocService', () => {
 
       callGenToc();
       const unspy2 = scrollSpyService.$lastInfo.unspy;
-      scrollSpyService.$lastInfo.active.next({index: 3} as ScrollItem);
+      scrollSpyService.$lastInfo.active.next({ index: 3 } as ScrollItem);
 
       expect(unspy2).not.toHaveBeenCalled();
       expect(indices).toEqual([null, 1, null, null, 3]);
 
       callGenToc();
-      scrollSpyService.$lastInfo.active.next({index: 4} as ScrollItem);
+      scrollSpyService.$lastInfo.active.next({ index: 4 } as ScrollItem);
 
       expect(unspy2).toHaveBeenCalled();
       expect(indices).toEqual([null, 1, null, null, 3, null, 4]);
@@ -135,13 +135,13 @@ describe('TocService', () => {
 
       callGenToc();
       const activeSubject1 = scrollSpyService.$lastInfo.active;
-      activeSubject1.next({index: 1} as ScrollItem);
-      activeSubject1.next({index: 2} as ScrollItem);
+      activeSubject1.next({ index: 1 } as ScrollItem);
+      activeSubject1.next({ index: 2 } as ScrollItem);
 
       callGenToc();
       const activeSubject2 = scrollSpyService.$lastInfo.active;
-      activeSubject2.next({index: 3} as ScrollItem);
-      activeSubject2.next({index: 4} as ScrollItem);
+      activeSubject2.next({ index: 3 } as ScrollItem);
+      activeSubject2.next({ index: 4 } as ScrollItem);
 
       expect(indices).toEqual([null, 1, 2, null, 3, 4]);
     });

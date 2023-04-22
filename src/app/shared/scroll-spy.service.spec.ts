@@ -17,7 +17,7 @@ describe('ScrollSpiedElement', () => {
 
   describe('#calculateTop()', () => {
     it('should calculate the `top` value', () => {
-      const elem = {getBoundingClientRect: () => ({top: 100})} as Element;
+      const elem = { getBoundingClientRect: () => ({ top: 100 }) } as Element;
       const spiedElem = new ScrollSpiedElement(elem, 42);
 
       spiedElem.calculateTop(0, 0);
@@ -220,21 +220,21 @@ describe('ScrollSpyService', () => {
       activeIndices1.length = 0;
       activeIndices2.length = 0;
 
-      spiedElemGroups[0].activeScrollItem.next({index: 1} as ScrollItem);
-      spiedElemGroups[0].activeScrollItem.next({index: 2} as ScrollItem);
-      spiedElemGroups[1].activeScrollItem.next({index: 3} as ScrollItem);
+      spiedElemGroups[0].activeScrollItem.next({ index: 1 } as ScrollItem);
+      spiedElemGroups[0].activeScrollItem.next({ index: 2 } as ScrollItem);
+      spiedElemGroups[1].activeScrollItem.next({ index: 3 } as ScrollItem);
       spiedElemGroups[0].activeScrollItem.next(null);
-      spiedElemGroups[1].activeScrollItem.next({index: 4} as ScrollItem);
+      spiedElemGroups[1].activeScrollItem.next({ index: 4 } as ScrollItem);
       spiedElemGroups[1].activeScrollItem.next(null);
-      spiedElemGroups[0].activeScrollItem.next({index: 5} as ScrollItem);
-      spiedElemGroups[1].activeScrollItem.next({index: 6} as ScrollItem);
+      spiedElemGroups[0].activeScrollItem.next({ index: 5 } as ScrollItem);
+      spiedElemGroups[1].activeScrollItem.next({ index: 6 } as ScrollItem);
 
       expect(activeIndices1).toEqual([1, 2, null, 5]);
       expect(activeIndices2).toEqual([3, 4, null, 6]);
     });
 
     it('should remember and emit the last active item to new subscribers', () => {
-      const items = [{index: 1}, {index: 2}, {index: 3}] as ScrollItem[];
+      const items = [{ index: 1 }, { index: 2 }, { index: 3 }] as ScrollItem[];
       let lastActiveItem: ScrollItem|null;
 
       const info = scrollSpyService.spyOn([]);
@@ -256,7 +256,7 @@ describe('ScrollSpyService', () => {
     });
 
     it('should only emit distinct values on `active`', () => {
-      const items = [{index: 1}, {index: 2}] as ScrollItem[];
+      const items = [{ index: 1 }, { index: 2 }] as ScrollItem[];
       const activeIndices: (number | null)[] = [];
 
       const info = scrollSpyService.spyOn([]);

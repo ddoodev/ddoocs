@@ -96,7 +96,7 @@ export class NavigationService {
 
       (navMap, url) => {
         const urlKey = url.startsWith('ref/') ? 'ref' : url;
-        return navMap.get(urlKey) || { '' : { view: '', url: urlKey, nodes: [] }};
+        return navMap.get(urlKey) || { '' : { view: '', url: urlKey, nodes: [] } };
       })
       .pipe(publishReplay(1));
     (currentNodes as ConnectableObservable<CurrentNodes>).connect();

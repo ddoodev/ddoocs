@@ -26,7 +26,7 @@ export function getAttrs(el:  HTMLElement | ElementRef): AttrMap {
 export function getAttrValue(attrs: AttrMap, attr: string | string[]): string | undefined {
   const key = (typeof attr === 'string')
       ? attr
-      : attr.find(a => attrs.hasOwnProperty(a.toLowerCase()));
+      : attr.find(a => a.toLowerCase() in attrs);
 
   return (key === undefined) ? undefined : attrs[key.toLowerCase()];
 }
@@ -36,19 +36,19 @@ export function getAttrValue(attrs: AttrMap, attr: string | string[]): string | 
  * @param attrValue The string value of some attribute (or undefined if attribute not present).
  * @param def Default boolean value when attribute is undefined.
  */
-export function boolFromValue(attrValue: string | undefined, def: boolean = false) {
+export function boolFromValue(attrValue: string | undefined, def = false) {
   return attrValue === undefined ? def : attrValue.trim() !== 'false';
 }
 
 /**
  * Return the boolean state of attribute from an element
  * @param el The source of the attributes.
- * @param atty Name of the attribute or a string of candidate attribute names.
+ * @param attr Name of the attribute or a string of candidate attribute names.
  * @param def Default boolean value when attribute is undefined.
  */
 export function getBoolFromAttribute(
   el:  HTMLElement | ElementRef,
   attr: string | string[],
-  def: boolean = false): boolean {
+  def = false): boolean {
   return boolFromValue(getAttrValue(getAttrs(el), attr), def);
 }

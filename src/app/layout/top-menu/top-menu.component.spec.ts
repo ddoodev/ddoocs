@@ -33,8 +33,8 @@ describe('TopMenuComponent', () => {
 class TestNavigationService {
   navJson = {
     TopBar: [
-      {url: 'api', title: 'API' },
-      {url: 'features', title: 'Features' }
+      { url: 'api', title: 'API' },
+      { url: 'features', title: 'Features' }
     ],
   };
 

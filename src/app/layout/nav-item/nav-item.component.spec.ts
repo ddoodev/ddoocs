@@ -183,7 +183,7 @@ describe('NavItemComponent', () => {
         title: 'x',
         children: [
           { title: 'a' },
-          { title: 'b', hidden: true},
+          { title: 'b', hidden: true },
           { title: 'c' }
         ]
       };

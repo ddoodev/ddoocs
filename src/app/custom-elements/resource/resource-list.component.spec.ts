@@ -18,8 +18,8 @@ describe('ResourceListComponent', () => {
   beforeEach(() => {
     injector = ReflectiveInjector.resolveAndCreate([
       ResourceListComponent,
-      {provide: PlatformLocation, useClass: TestPlatformLocation },
-      {provide: ResourceService, useClass: TestResourceService }
+      { provide: PlatformLocation, useClass: TestPlatformLocation },
+      { provide: ResourceService, useClass: TestResourceService }
     ]);
 
     location = injector.get(PlatformLocation);
@@ -34,7 +34,7 @@ describe('ResourceListComponent', () => {
   it('href(id) should return the expected href', () => {
     location.pathname = '////resources';
     const component = getComponent();
-    expect(component.href({id: 'foo'})).toBe('resources#foo');
+    expect(component.href({ id: 'foo' })).toBe('resources#foo');
   });
 
   it('should set scroll position to zero when no target element', () => {
@@ -45,19 +45,19 @@ describe('ResourceListComponent', () => {
 
   it('should set scroll position to element.scrollTop when that is defined', () => {
     const component = getComponent();
-    component.onScroll({scrollTop: 42});
+    component.onScroll({ scrollTop: 42 });
     expect(component.scrollPos).toBe(42);
   });
 
   it('should set scroll position to element.body.scrollTop when that is defined', () => {
     const component = getComponent();
-    component.onScroll({body: {scrollTop: 42}});
+    component.onScroll({ body: { scrollTop: 42 } });
     expect(component.scrollPos).toBe(42);
   });
 
   it('should set scroll position to 0 when no target.body.scrollTop defined', () => {
     const component = getComponent();
-    component.onScroll({body: {}});
+    component.onScroll({ body: {} });
     expect(component.scrollPos).toBe(0);
   });
 

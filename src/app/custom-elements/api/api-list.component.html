@@ -1,6 +1,6 @@
 <div class="l-flex-wrap api-filter">
-  <aio-select (change)="setPackage($event.option)" [options]="pkgs" [selected]="pkg" [showSymbol]="true" label="Package:"></aio-select>
-  <aio-select (change)="setType($event.option)" [options]="types" [selected]="type" [showSymbol]="true" label="Type:"> </aio-select>
+  <aio-select (changeEmitter)="setPackage($event.option)" [options]="pkgs" [selected]="pkg" [showSymbol]="true" label="Package:"></aio-select>
+  <aio-select (changeEmitter)="setType($event.option)" [options]="types" [selected]="type" [showSymbol]="true" label="Type:"> </aio-select>
 
   <div class="form-search">
     <input #filter placeholder="Filter" aria-label="Filter" (input)="setQuery(filter.value)" />
