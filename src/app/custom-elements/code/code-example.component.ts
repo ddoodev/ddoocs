@@ -30,7 +30,7 @@ import { CodeComponent } from './code.component';
   `,
 })
 export class CodeExampleComponent implements AfterViewInit {
-  classes: unknown;
+  classes: any;
 
   @Input() language: string;
 
