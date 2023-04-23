@@ -147,6 +147,8 @@ p > code, li > code, td > code, th > code {
 
 code {
   font-family: $code-font;
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0;
   font-size: 90%;
 }
 
