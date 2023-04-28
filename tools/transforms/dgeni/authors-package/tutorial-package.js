@@ -6,32 +6,32 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-/* eslint no-console: "off" */
-
 const Package = require('dgeni').Package;
 const contentPackage = require('../angular-content-package');
 const { readFileSync } = require('fs');
 const { resolve } = require('canonical-path');
-const { CONTENTS_PATH } = require('../config');
+const { CONTENTS_PATH } = require('../../config');
 
-function createPackage(guideName) {
+/* eslint no-console: "off" */
 
-  const guideFilePath = `${CONTENTS_PATH}/guide/${guideName}.md`;
-  const guideFile = readFileSync(guideFilePath, 'utf8');
+function createPackage(tutorialName) {
+
+  const tutorialFilePath = `${CONTENTS_PATH}/tutorial/${tutorialName}.md`;
+  const tutorialFile = readFileSync(tutorialFilePath, 'utf8');
   const examples = [];
-  guideFile.replace(/<code-(?:pane|example) [^>]*path="([^"]+)"/g, (_, path) => examples.push('examples/' + path));
+  tutorialFile.replace(/<code-(?:pane|example) [^>]*path="([^"]+)"/g, (_, path) => examples.push('examples/' + path));
 
   if (examples.length) {
-    console.log('The following example files are referenced in this guide:');
+    console.log('The following example files are referenced in this tutorial:');
     console.log(examples.map(example => ' - ' + example).join('\n'));
   }
 
-  return new Package('author-guide', [contentPackage])
+  return new Package('author-tutorial', [contentPackage])
     .config(function(readFilesProcessor) {
       readFilesProcessor.sourceFiles = [
         {
           basePath: CONTENTS_PATH,
-          include: guideFilePath,
+          include: tutorialFilePath,
           fileReader: 'contentFileReader'
         },
         {
@@ -42,5 +42,6 @@ function createPackage(guideName) {
       ];
     });
 }
+
 
 module.exports = { createPackage };

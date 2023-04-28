@@ -7,7 +7,7 @@
  */
 const Package = require('dgeni').Package;
 const apiPackage = require('../angular-api-package');
-const { API_SOURCE_PATH } = require('../config');
+const { API_SOURCE_PATH } = require('../../config');
 
 const packageMap = {
   animations: ['animations/index.ts', 'animations/browser/index.ts', 'animations/browser/testing/index.ts'],

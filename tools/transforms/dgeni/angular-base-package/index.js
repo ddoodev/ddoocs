@@ -15,7 +15,8 @@ const targetPackage = require('../target-package');
 const remarkPackage = require('../remark-package');
 const postProcessPackage = require('dgeni-packages/post-process-html');
 
-const { PROJECT_ROOT, CONTENTS_PATH, OUTPUT_PATH, DOCS_OUTPUT_PATH, TEMPLATES_PATH, AIO_PATH, requireFolder } = require('../config');
+const { PROJECT_ROOT, CONTENTS_PATH, OUTPUT_PATH, DOCS_OUTPUT_PATH, TEMPLATES_PATH, AIO_PATH} = require('../../config');
+const { requireFolder } = require('../../utils');
 
 // prettier-ignore
 module.exports = new Package('angular-base', [

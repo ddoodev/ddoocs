@@ -2,7 +2,7 @@
 const watchr = require('watchr');
 const {relative} = require('canonical-path');
 const {generateDocs} = require('./index.js');
-const { PROJECT_ROOT, CONTENTS_PATH, API_SOURCE_PATH } = require('../config');
+const { PROJECT_ROOT, CONTENTS_PATH, API_SOURCE_PATH } = require('../../config');
 
 function listener(changeType, fullPath) {
   try {

@@ -11,7 +11,7 @@ const apiPackage = require('../angular-api-package');
 const contentPackage = require('../angular-content-package');
 const { extname, resolve } = require('canonical-path');
 const { existsSync } = require('fs');
-const { SRC_PATH } = require('../config');
+const { SRC_PATH } = require('../../config');
 
 // prettier-ignore
 module.exports = new Package('angular.io', [gitPackage, apiPackage, contentPackage])

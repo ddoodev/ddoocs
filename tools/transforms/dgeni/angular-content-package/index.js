@@ -9,7 +9,7 @@ const Package = require('dgeni').Package;
 const basePackage = require('../angular-base-package');
 const contentPackage = require('../content-package');
 
-const { CONTENTS_PATH } = require('../config');
+const { CONTENTS_PATH } = require('../../config');
 
 module.exports = new Package('angular-content', [basePackage, contentPackage])
 

@@ -1,7 +1,7 @@
 var Package = require('dgeni').Package;
 var jsdocPackage = require('dgeni-packages/jsdoc');
 var linksPackage = require('../links-package');
-var { requireFolder } = require('../config');
+const { requireFolder } = require('../../utils');
 
 // Define the dgeni package for generating the docs
 module.exports = new Package('content', [jsdocPackage, linksPackage])

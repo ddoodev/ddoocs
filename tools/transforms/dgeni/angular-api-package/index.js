@@ -9,7 +9,8 @@ const Package = require('dgeni').Package;
 
 const basePackage = require('../angular-base-package');
 const typeScriptPackage = require('dgeni-packages/typescript');
-const { API_SOURCE_PATH, API_TEMPLATES_PATH, requireFolder } = require('../config');
+const { API_SOURCE_PATH, API_TEMPLATES_PATH, repositories} = require('../../config');
+const { convertRepositoriesToDgeniModules, requireFolder } = require('../../utils');
 
 // prettier-ignore
 module.exports = new Package('angular-api', [basePackage, typeScriptPackage])
@@ -63,25 +64,7 @@ module.exports = new Package('angular-api', [basePackage, typeScriptPackage])
     readTypeScriptModules.ignoreExportsMatching = [/^[_ɵ]|^VERSION$/];
     readTypeScriptModules.hidePrivateMembers = true;
 
-    readTypeScriptModules.sourceFiles = [
-      'discordoo/src/api/index.ts',
-      'discordoo/src/cache/index.ts',
-      'discordoo/src/constants/index.ts',
-      'discordoo/src/core/index.ts',
-      'discordoo/src/events/index.ts',
-      'discordoo/src/gateway/index.ts',
-      'discordoo/src/rest/index.ts',
-      'discordoo/src/sharding/index.ts',
-      'discordoo/src/utils/index.ts',
-      'discordoo/src/wrapper/index.ts',
-      'collection/src/Collection.ts',
-      'collection/src/interfaces/index.ts',
-      'providers/src/cache/index.ts',
-      'providers/src/gateway/index.ts',
-      'providers/src/ipc/index.ts',
-      'providers/src/Provider.ts',
-      'providers/src/rest/index.ts',
-    ];
+    readTypeScriptModules.sourceFiles = convertRepositoriesToDgeniModules(repositories);
 
     // API Examples
     readFilesProcessor.sourceFiles = [
