@@ -150,7 +150,7 @@
     <tbody>
     {% for property in nonInternalProperties %}
       <tr class="{$ propertyClass $}">
-        <td><a id="{$ property.anchor $}"></a><code class="{% if property.deprecated %} deprecated-api-item{% endif %}">{$ property.name $}</code></td>
+        <td><a id="{$ property.anchor $}"></a><code class="{% if property.deprecated %} deprecated-api-item{% endif %} no-auto-link">{$ property.name $}</code></td>
         <td><label class="property-type-label"><code>{$ property.type | escape $}</code></label></td>
         <td>
           {%- if (property.isGetAccessor or property.isReadonly) and not property.isSetAccessor %}<span class='read-only-property'>Read-only.</span>{% endif %}
