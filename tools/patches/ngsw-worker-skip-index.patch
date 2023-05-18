@@ -1,0 +1,11 @@
+--- node_modules/@angular/service-worker/ngsw-worker.js
++++ node_modules/@angular/service-worker/ngsw-worker.js
+@@ -470,7 +470,7 @@
+           response = await this.safeFetch(cacheBustReq);
+           if (response.ok) {
+             const cacheBustedHash = sha1Binary(await response.clone().arrayBuffer());
+-            if (canonicalHash !== cacheBustedHash) {
++            if (canonicalHash !== cacheBustedHash && new URL(req.url).pathname !== '/index.html') {
+               throw new SwCriticalError(`Hash mismatch (cacheBustedFetchFromNetwork): ${req.url}: expected ${canonicalHash}, got ${cacheBustedHash} (after cache busting)`);
+             }
+           }
