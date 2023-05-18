@@ -4,8 +4,6 @@ import { Location, PlatformLocation } from '@angular/common';
 import { ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { SwUpdatesService } from 'app/sw-updates/sw-updates.service';
-
 @Injectable()
 export class LocationService {
 
@@ -22,20 +20,22 @@ export class LocationService {
 
   constructor(
     private location: Location,
-    private platformLocation: PlatformLocation,
-    swUpdates: SwUpdatesService) {
+    private platformLocation: PlatformLocation
+  ) {
 
     this.urlSubject.next(location.path(true));
 
     this.location.subscribe(state => {
       return this.urlSubject.next(state.url || '');
     });
+  }
 
-    swUpdates.updateActivated.subscribe(() => this.swUpdateActivated = true);
+  setUpdateActivated(value: boolean) {
+    this.swUpdateActivated = value;
   }
 
   // TODO: ignore if url-without-hash-or-search matches current location?
-  go(url: string|null|undefined) {
+  go(url: string | null | undefined) {
     if (!url) { return; }
     url = this.stripSlashes(url);
     if (/^http/.test(url) || this.swUpdateActivated) {

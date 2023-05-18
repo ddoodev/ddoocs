@@ -1,9 +1,10 @@
 import { ApplicationRef, Injectable, OnDestroy } from '@angular/core';
 import { SwUpdate, VersionReadyEvent } from '@angular/service-worker';
-import { concat, filter, from, interval, NEVER, Observable, of, Subject } from 'rxjs';
+import { concat, filter, from, interval, Subject } from 'rxjs';
 import { first, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 import { Logger } from 'app/shared/logger.service';
+import { LocationService } from '../shared/location.service';
 
 
 /**
@@ -21,11 +22,9 @@ import { Logger } from 'app/shared/logger.service';
 export class SwUpdatesService implements OnDestroy {
   private checkInterval = 1000 * 60 * 60 * 6;  // 6 hours
   private onDestroy = new Subject<void>();
-  updateActivated: Observable<boolean>;
 
-  constructor(appRef: ApplicationRef, private logger: Logger, private swu: SwUpdate) {
+  constructor(appRef: ApplicationRef, locationService: LocationService, private logger: Logger, private swu: SwUpdate) {
     if (!swu.isEnabled) {
-      this.updateActivated = NEVER.pipe(takeUntil(this.onDestroy));
       return;
     }
 
@@ -49,7 +48,7 @@ export class SwUpdatesService implements OnDestroy {
       .subscribe((isActivated) => {
         if (isActivated) {
           this.log('Update activated');
-          this.updateActivated = of(true).pipe(takeUntil(this.onDestroy));
+          locationService.setUpdateActivated(true);
         }
       });
   }
