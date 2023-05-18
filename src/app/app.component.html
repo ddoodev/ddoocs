@@ -42,10 +42,10 @@
     <aio-nav-menu
             *ngIf="!isSideBySide"
             [nodes]="topMenuNarrowNodes"
-            [currentNode]="currentNodes?.TopBarNarrow"
+            [currentNode]="currentNodes.TopBarNarrow"
             [isWide]="false"
     ></aio-nav-menu>
-    <aio-nav-menu [nodes]="sideNavNodes" [currentNode]="currentNodes?.SideNav" [isWide]="isSideBySide"></aio-nav-menu>
+    <aio-nav-menu [nodes]="sideNavNodes" [currentNode]="currentNodes.SideNav" [isWide]="isSideBySide"></aio-nav-menu>
   </mat-sidenav>
 
   <section class="sidenav-content" [id]="pageId" role="main">

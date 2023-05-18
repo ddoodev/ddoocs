@@ -50,7 +50,7 @@ aio-shell.folder-docs mat-toolbar.mat-toolbar,
 aio-shell.folder-guide mat-toolbar.mat-toolbar,
 aio-shell.folder-tutorial mat-toolbar.mat-toolbar {
   @media (min-width: 992px) {
-    .hamburger.mat-button {
+    .hamburger.mat-mdc-button {
       // Hamburger shown on non-marketing pages on large screens.
       margin: $hamburgerShownMargin;
     }
@@ -58,7 +58,7 @@ aio-shell.folder-tutorial mat-toolbar.mat-toolbar {
 }
 
 // HAMBURGER BUTTON
-.hamburger.mat-button {
+.hamburger.mat-mdc-button {
   height: 100%;
   margin: $hamburgerShownMargin;
   padding: 0;
@@ -82,6 +82,10 @@ aio-shell.folder-tutorial mat-toolbar.mat-toolbar {
   & .mat-icon {
     color: white;
     position: inherit;
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    margin: 2px 2px 1px;
   }
 }
 

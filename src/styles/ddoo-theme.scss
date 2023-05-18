@@ -3,7 +3,6 @@
 
 // Include the base styles for Angular Material core. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
-@include mat.core();
 @import "./discordoo-palette";
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
@@ -16,7 +15,17 @@ $ddoo-accent:  mat.define-palette(mat.$pink-palette, 700, 600, 800);
 $ddoo-warn:    mat.define-palette(mat.$red-palette);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$ddoo-theme: mat.define-light-theme($ddoo-primary, $ddoo-accent, $ddoo-warn);
+$ddoo-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $ddoo-primary,
+      accent: $ddoo-accent,
+      warn: $ddoo-warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0
+  )
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component

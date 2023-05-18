@@ -16,7 +16,7 @@ export class EnumTransformer {
     }
   }
 
-  private _transformer(context: ts.TransformationContext) {
+  private _transformer(context: ts.TransformationContext): ts.Transformer<ts.Node> {
     const { factory } = context;
 
     const visitor: ts.Visitor = (node: ts.Node): ts.Node => {
@@ -51,13 +51,13 @@ export class EnumTransformer {
           }
         });
 
-        const newNode = factory.updateEnumDeclaration(node, node.decorators, node.modifiers, node.name, newMembers);
+        const newNode = factory.updateEnumDeclaration(node, node.modifiers, node.name, newMembers);
         return ts.visitEachChild(newNode, visitor, context);
       }
 
       return ts.visitEachChild(node, visitor, context);
     };
 
-    return (node: ts.Node) => ts.visitNode(node, visitor);
+    return (node: ts.Node) => ts.visitNode(node, visitor)!;
   }
 }

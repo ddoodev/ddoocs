@@ -10,7 +10,7 @@ export interface Option {
   template: `<div class="form-select-menu">
     <button class="form-select-button" (click)="toggleOptions()">
       <strong>{{ label }}</strong
-      ><span *ngIf="showSymbol" class="symbol {{ selected?.value }}"></span>{{ selected?.title }}
+      ><span *ngIf="showSymbol" class="symbol {{ selected.value }}"></span>{{ selected.title }}
     </button>
     <ul class="form-select-dropdown" *ngIf="showOptions">
       <li

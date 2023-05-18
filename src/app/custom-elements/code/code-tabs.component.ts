@@ -24,7 +24,7 @@ export interface TabInfo {
   template: `
     <!-- Use content projection so that the provided HTML's code-panes can be split into tabs -->
     <div #content style="display: none"><ng-content></ng-content></div>
-    <mat-card>
+    <mat-card appearance="outlined">
       <mat-tab-group class="code-tab-group" disableRipple>
         <mat-tab style="overflow-y: hidden;" *ngFor="let tab of tabs">
           <ng-template mat-tab-label>

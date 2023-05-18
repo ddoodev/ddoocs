@@ -6,7 +6,9 @@
   ],
   "overrides": [
     {
-      "files": ["*.ts"],
+      "files": [
+        "*.ts"
+      ],
       "parserOptions": {
         "project": [
           "tsconfig.json",
@@ -41,10 +43,12 @@
         "no-redeclare": "error",
         "valid-typeof": "error",
         "quotes": [
-          "error", "single"
+          "error",
+          "single"
         ],
         "semi": [
-          "error", "always"
+          "error",
+          "always"
         ],
         "object-curly-spacing": [
           "error",
@@ -53,7 +57,9 @@
       }
     },
     {
-      "files": ["*.html"],
+      "files": [
+        "*.html"
+      ],
       "extends": [
         "plugin:@angular-eslint/template/recommended"
       ],
@@ -62,7 +68,8 @@
   ],
   "rules": {
     "linebreak-style": [
-      "error", "unix"
+      "error",
+      "unix"
     ]
   }
 }

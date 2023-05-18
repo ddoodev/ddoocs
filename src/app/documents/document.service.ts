@@ -40,7 +40,7 @@ export class DocumentService {
     private http: HttpClient,
     location: LocationService) {
     // Whenever the URL changes we try to get the appropriate doc
-    this.currentDocument = location.currentPath.pipe(switchMap(path => this.getDocument(path)));
+    this.currentDocument = location.currentPath.pipe(switchMap(path => this.getDocument(<string>path)));
   }
 
   private getDocument(url: string) {

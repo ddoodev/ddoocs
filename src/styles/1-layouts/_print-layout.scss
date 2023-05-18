@@ -83,13 +83,12 @@
     .content code {
         border: 0.5px solid $lightgray;
     }
-
+    /* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version.*/
     .mat-tab-labels {
         div.mat-tab-label {
             &:not(.mat-tab-label-active) span {
                 font-style: italic;
             }
-
             &.mat-tab-label-active span {
                 font-weight: bold;
             }

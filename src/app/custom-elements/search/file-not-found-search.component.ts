@@ -9,7 +9,7 @@ import { SearchService } from 'app/search/search.service';
   selector: 'aio-file-not-found-search',
   template:
   `<p>Let's see if any of these search results help...</p>
-  <aio-search-results class="embedded" [searchResults]="searchResults | async"></aio-search-results>`
+    <aio-search-results class="embedded" [searchResults]="searchResults | async"></aio-search-results>`
 })
 export class FileNotFoundSearchComponent implements OnInit {
   searchResults: Observable<SearchResults>;
@@ -17,7 +17,7 @@ export class FileNotFoundSearchComponent implements OnInit {
 
   ngOnInit() {
     this.searchResults = this.location.currentPath.pipe(switchMap(path => {
-      const query = path.split(/\W+/).join(' ');
+      const query = (<string>path).split(/\W+/).join(' ');
       return this.search.search(query);
     }));
   }

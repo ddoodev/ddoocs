@@ -54,14 +54,16 @@ code-tabs.avoidFile mat-tab-body {
   border: 0.5px solid $anti-pattern;
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version.*/
 code-tabs div .mat-tab-body-content {
   height: auto;
 }
 
-code-tabs .mat-tab-body-wrapper mat-tab-body .mat-tab-body {
+code-tabs .mat-mdc-tab-body-wrapper mat-tab-body .mat-tab-body {
   overflow-y: hidden;
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version.*/
 code-tabs mat-tab-body-content .fadeIn {
   animation: opacity 2s ease-in;
 }
@@ -109,10 +111,12 @@ aio-code pre {
   }
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version.*/
 .code-tab-group .mat-tab-label {
   white-space: nowrap;
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version.*/
 .code-tab-group .mat-tab-body-content {
   height: auto;
   transform: none;

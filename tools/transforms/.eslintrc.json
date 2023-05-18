@@ -1,5 +1,7 @@
 {
-  "ignorePatterns": ["**/*.template.js"],
+  "ignorePatterns": [
+    "**/*.template.js"
+  ],
   "env": {
     "es2020": true,
     "jasmine": true,
@@ -8,26 +10,38 @@
   "extends": [
     "../../.eslintrc.json"
   ],
-  "plugins": ["jasmine"],
+  "plugins": [
+    "jasmine"
+  ],
   "overrides": [
     {
-      "files": ["*.js"],
-      "extends": ["eslint:recommended"],
+      "files": [
+        "*.js"
+      ],
+      "extends": [
+        "eslint:recommended"
+      ],
       "rules": {
         "quotes": [
-          "error", "single"
+          "error",
+          "single"
         ],
         "semi": [
-          "error", "always"
+          "error",
+          "always"
         ]
       }
     },
     {
-      "files": ["*.ts"],
+      "files": [
+        "*.ts"
+      ],
       "parserOptions": {
         "project": "../../tsconfig.docs.json"
       },
-      "extends": ["plugin:@typescript-eslint/recommended"]
+      "extends": [
+        "plugin:@typescript-eslint/recommended"
+      ]
     }
   ]
 }

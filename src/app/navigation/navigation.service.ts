@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { combineLatest, ConnectableObservable, Observable } from 'rxjs';
+import {combineLatest, Connectable, ConnectableObservable, Observable} from 'rxjs';
 import { map, publishLast, publishReplay } from 'rxjs/operators';
 
 import { LocationService } from 'app/shared/location.service';
@@ -95,11 +95,11 @@ export class NavigationService {
       this.location.currentPath,
 
       (navMap, url) => {
-        const urlKey = url.startsWith('ref/') ? 'ref' : url;
+        const urlKey = (<string>url).startsWith('ref/') ? 'ref' : <string>url;
         return navMap.get(urlKey) || { '' : { view: '', url: urlKey, nodes: [] } };
       })
       .pipe(publishReplay(1));
-    (currentNodes as ConnectableObservable<CurrentNodes>).connect();
+    (currentNodes as Connectable<CurrentNodes>).connect();
     return currentNodes;
   }
 

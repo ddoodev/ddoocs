@@ -194,28 +194,34 @@ export class DocViewerComponent implements OnDestroy {
       const seconds = Number(cssValue.replace(/s$/, ''));
       return 1000 * seconds;
     };
+
+    type StringValueCSSStyleDeclaration = Exclude<
+      {[K in keyof CSSStyleDeclaration]:
+        CSSStyleDeclaration[K] extends string ? K : never;}[keyof CSSStyleDeclaration],
+      number>;
+
     const animateProp =
-        (elem: HTMLElement, prop: keyof CSSStyleDeclaration, from: string, to: string, duration = 200) => {
-          const animationsDisabled = !DocViewerComponent.animationsEnabled
-                                     || this.hostElement.classList.contains(NO_ANIMATIONS);
-          if (prop === 'length' || prop === 'parentRule') {
-            // We cannot animate length or parentRule properties because they are readonly
-            return this.void$;
-          }
-          elem.style.transition = '';
-          return animationsDisabled
-              ? this.void$.pipe(tap(() => elem.style[`${prop}`] = to))
-              : this.void$.pipe(
-                    // In order to ensure that the `from` value will be applied immediately (i.e.
-                    // without transition) and that the `to` value will be affected by the
-                    // `transition` style, we need to ensure an animation frame has passed between
-                    // setting each style.
-                    switchMap(() => raf$), tap(() => elem.style[`${prop}`] = from),
-                    switchMap(() => raf$), tap(() => elem.style.transition = `all ${duration}ms ease-in-out`),
-                    switchMap(() => raf$), tap(() => elem.style[`${prop}`] = to),
-                    switchMap(() => timer(getActualDuration(elem))), switchMap(() => this.void$),
-                );
-        };
+      (elem: HTMLElement, prop: StringValueCSSStyleDeclaration, from: string, to: string,
+       duration = 200) => {
+        const animationsDisabled = this.hostElement.classList.contains(NO_ANIMATIONS);
+        elem.style.transition = '';
+        return animationsDisabled ?
+          this.void$.pipe(tap(() => elem.style[prop] = to)) :
+          this.void$.pipe(
+            // In order to ensure that the `from` value will be applied immediately (i.e.
+            // without transition) and that the `to` value will be affected by the
+            // `transition` style, we need to ensure an animation frame has passed between
+            // setting each style.
+            switchMap(() => raf$),
+            tap(() => elem.style[prop] = from),
+            switchMap(() => raf$),
+            tap(() => elem.style.transition = `all ${duration}ms ease-in-out`),
+            switchMap(() => raf$),
+            tap(() => elem.style[prop] = to),
+            switchMap(() => timer(getActualDuration(elem))),
+            switchMap(() => this.void$),
+          );
+      };
 
     const animateLeave = (elem: HTMLElement) => animateProp(elem, 'opacity', '1', '0.1');
     const animateEnter = (elem: HTMLElement) => animateProp(elem, 'opacity', '0.1', '1');
