@@ -72,10 +72,6 @@ mat-sidenav-container div.mat-sidenav-content {
     text-shadow: 0 0 5px #ffffff;
   }
 
-  &:focus {
-    outline: $accentgrey auto 2px;
-  }
-
   //icons _within_ nav
   .mat-icon {
     position: absolute;
