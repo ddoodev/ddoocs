@@ -90,6 +90,9 @@ mat-sidenav-container div.mat-sidenav-content {
 }
 
 button.vertical-menu-item {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-backface-visibility: hidden;
+
   border: none;
   background-color: transparent;
   margin-right: 0;
