@@ -11,10 +11,10 @@ export class LocationService {
   private urlSubject = new ReplaySubject<string>(1);
   private swUpdateActivated = false;
 
-  currentUrl = this.urlSubject
+  public currentUrl = this.urlSubject
     .pipe(map(url => this.stripSlashes(url)));
 
-  currentPath = this.currentUrl.pipe(
+  public currentPath = this.currentUrl.pipe(
     map(url => (url.match(/[^?#]*/) || [])[0]),  // strip query and hash
   );
 

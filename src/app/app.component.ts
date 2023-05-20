@@ -12,7 +12,7 @@ import { SearchResults } from 'app/search/interfaces';
 import { SearchService } from 'app/search/search.service';
 import { TocService } from 'app/shared/toc.service';
 
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, firstValueFrom, Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
 import { Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
@@ -111,7 +111,13 @@ export class AppComponent implements OnInit {
     @Inject(DOCUMENT) private dom
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    // Redirect index page to guide
+    const currentUrl = await firstValueFrom(this.locationService.currentPath);
+    if (!currentUrl) {
+      this.locationService.go('/guide');
+    }
+
     // Do not initialize the search on browsers that lack web worker support
     if ('Worker' in window) {
       // Delay initialization by up to 2 seconds
@@ -125,14 +131,12 @@ export class AppComponent implements OnInit {
     this.documentService.currentDocument.subscribe((doc) => (this.currentDocument = doc));
 
     this.locationService.currentPath.subscribe((path) => {
-      if (!path) {
-        this.locationService.go('/guide');
-      } else if (path === this.currentPath) {
+        if (path === this.currentPath) {
         // scroll only if on same page (most likely a change to the hash)
         this.scrollService.scroll();
       } else {
         // don't scroll; leave that to `onDocRendered`
-        this.currentPath = path;
+        this.currentPath = path as string;
 
         // Start progress bar if doc not rendered within brief time
         clearTimeout(this.isFetchingTimeout);
