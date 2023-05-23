@@ -34,6 +34,7 @@ module.exports = new Package('angular-api', [basePackage, typeScriptPackage])
   .processor(require('./processors/simplifyMemberAnchors'))
   .processor(require('./processors/computeStability'))
   .processor(require('./processors/markAliases').markAliases)
+  .processor(require('./processors/normalizePaths').normalizePaths)
 
   /**
    * These are the API doc types that will be rendered to actual files.

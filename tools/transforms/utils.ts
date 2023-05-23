@@ -3,7 +3,19 @@ import { join, resolve } from 'path';
 import { readdirSync } from 'fs';
 
 export function convertRepositoriesToDgeniModules(repositories: Repository[]): string[] {
-  return repositories.map(repo => repo.modules.map(m => join(repo.name, getSourceFolderName(repo), m))).flat();
+  return repositories
+    .map(repo => {
+      const mappedRepository = repo.modules.map(m => getPathFromRepositoryRootToFile(repo, m));
+      if (repo.pseudoRootIndex) {
+        mappedRepository.push(getPathFromRepositoryRootToFile(repo, 'index.ts'));
+      }
+      return mappedRepository.sort((a, b) => a.localeCompare(b));
+    })
+    .flat();
+}
+
+export function getPathFromRepositoryRootToFile(repository: Repository, filename: string) {
+  return join(repository.name, getSourceFolderName(repository), filename);
 }
 
 export function getSourceFolderName(repository: Repository): string {
@@ -16,4 +28,3 @@ export function requireFolder(dirname, folderPath) {
     .filter(p => !/[._]spec\.js$/.test(p))  // ignore spec files
     .map(p => require(resolve(absolutePath, p)));
 }
-

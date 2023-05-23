@@ -20,9 +20,12 @@ export const repositories: Repository[] = [
   {
     name: 'collection',
     modules: [
-      'Collection.ts',
       'interfaces/index.ts',
-    ]
+      'utils/index.ts'
+    ],
+    pseudoRootIndex: {
+      exports: ['./Collection']
+    }
   },
   {
     name: 'providers',
@@ -30,9 +33,13 @@ export const repositories: Repository[] = [
       'cache/index.ts',
       'gateway/index.ts',
       'ipc/index.ts',
-      'Provider.ts',
       'rest/index.ts',
-    ]
+    ],
+    pseudoRootIndex: {
+      namedExports: [
+        { exportedMemberNames: ['Provider'], path: './Provider' }
+      ]
+    }
   }
 ];
 

@@ -20,12 +20,12 @@ module.exports = function generateApiListDoc() {
 };
 
 function getModuleInfo(moduleDoc) {
-  const moduleName = moduleDoc.id.replace(/\/index$/, '');
-  const moduleNameSplit = moduleName.toLowerCase().split('/');
+  const moduleName = moduleDoc.id.replace(/\/index$/, '').toLowerCase();
+  const moduleNameSplit = moduleName.split('/');
   return {
-    name: moduleName.toLowerCase(),
+    name: findEndsWithAndReplace(moduleName, 'src', 'index'),
     title: moduleNameSplit.filter(s => s !== 'src').join(' / '),
-    titleShort: moduleNameSplit[moduleNameSplit.length - 1],
+    titleShort: findEndsWithAndReplace(moduleNameSplit[moduleNameSplit.length - 1], 'src', 'index'),
     items: moduleDoc.exports
     // Ignore internals and private exports (indicated by the ɵ prefix)
       .filter(doc => !doc.internal && !doc.privateExport)
@@ -59,4 +59,8 @@ function getDocType(doc) {
 const stabilityProperties = ['stable', 'experimental', 'deprecated'];
 function getStability(doc) {
   return stabilityProperties.find(prop => prop in doc) || '';
+}
+
+function findEndsWithAndReplace(str, endsWith, replace) {
+  return str.endsWith(endsWith) ? str.replace(endsWith, replace) : str;
 }

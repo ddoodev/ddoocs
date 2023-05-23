@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import { join, sep } from 'path';
-import { Folder } from '../interfaces/Folder';
+import { Folder } from '../interfaces';
+import { Logger } from '../utils';
 
 const indexFileName = 'index.ts';
 
@@ -10,6 +11,8 @@ enum PathType {
 }
 
 export class DirectoryReader {
+  constructor(private logger: Logger) {}
+
   private isDirectoryOrFile(path: string): PathType {
     const lstat = fs.lstatSync(path);
 
@@ -32,7 +35,7 @@ export class DirectoryReader {
     const directory = fs.readdirSync(path);
     const index = directory.find((el) => el === indexFileName);
     if (!index) {
-      console.log('warn: index not found ', path);
+      this.logger.warn(`index not found ${path}`);
     }
 
     const folders = this.search(path, directory, PathType.Directory)

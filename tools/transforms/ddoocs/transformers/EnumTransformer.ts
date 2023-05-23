@@ -9,14 +9,14 @@ export class EnumTransformer {
 
   transform() {
     try {
-      return ts.transform(EnumTransformer.sourceFile, [this._transformer]);
+      return ts.transform(EnumTransformer.sourceFile, [this.transformer]);
     }
     catch (e) {
       throw new Error(`error while processing ${EnumTransformer.sourceFile.fileName}: ${e}`);
     }
   }
 
-  private _transformer(context: ts.TransformationContext): ts.Transformer<ts.Node> {
+  private transformer(context: ts.TransformationContext): ts.Transformer<ts.Node> {
     const { factory } = context;
 
     const visitor: ts.Visitor = (node: ts.Node): ts.Node => {
