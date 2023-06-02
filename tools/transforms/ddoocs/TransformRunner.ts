@@ -1,8 +1,7 @@
 import * as ts from 'typescript';
 import { Folder } from './interfaces';
-import * as fs from 'fs';
 import { join } from 'path';
-import { Logger } from './utils';
+import { FileSystem, Logger } from './utils';
 
 /* [string, string, boolean] -
  * transformation result,
@@ -18,6 +17,7 @@ export class TransformRunner {
   constructor(
     private readonly logger: Logger,
     private readonly printer: ts.Printer,
+    private readonly fileSystem: FileSystem,
     private readonly languageVersion?: ts.ScriptTarget,
   ) {}
 
@@ -34,7 +34,7 @@ export class TransformRunner {
   run(folder: Folder): void {
     if (folder.indexPath) {
       const indexPath = folder.indexPath as string;
-      const sourceText = fs.readFileSync(indexPath, { encoding: 'utf-8' });
+      const sourceText = this.fileSystem.readFile(indexPath);
       let sourceFile = this.createSourceFile('index.ts', sourceText);
 
       this.logger.debug(`running index transformer for ${indexPath}`);
@@ -42,23 +42,21 @@ export class TransformRunner {
         const res = transformer(sourceFile, indexPath, folder);
 
         if (Array.isArray(res)) {
-          fs.writeFileSync(res[0], res[1]);
+          this.fileSystem.writeFile(res[0], res[1]);
           if (res[2]) sourceFile = this.createSourceFile('index.ts', res[0]);
         } else if (typeof res === 'string') {
+          this.fileSystem.writeFile(indexPath, res);
           sourceFile = this.createSourceFile('index.ts', res);
         } else {
           return;
         }
       });
-
-      fs.writeFileSync(indexPath, this.printer.printFile(sourceFile));
-      this.logger.debug(`written file: ${indexPath}`);
     }
 
     if (folder.files.length) {
       folder.files.forEach((file) => {
         const path = join(folder.path, file);
-        const sourceText = fs.readFileSync(path, { encoding: 'utf-8' });
+        const sourceText = this.fileSystem.readFile(path);
         let sourceFile = this.createSourceFile(file, sourceText);
 
         this.logger.debug(`running file transformers for ${path}`);
@@ -67,17 +65,15 @@ export class TransformRunner {
           const res = transformer(sourceFile, path, folder);
 
           if (Array.isArray(res)) {
-            fs.writeFileSync(res[0], res[1]);
-            sourceFile = this.createSourceFile(file, res[0]);
+            this.fileSystem.writeFile(res[0], res[1]);
+            if (res[2]) sourceFile = this.createSourceFile(file, res[0]);
           } else if (typeof res === 'string') {
+            this.fileSystem.writeFile(path, res);
             sourceFile = this.createSourceFile(file, res);
           } else {
             return;
           }
         });
-
-        fs.writeFileSync(path, this.printer.printFile(sourceFile));
-        this.logger.debug(`written file: ${path}`);
       });
     }
 

@@ -1,19 +1,19 @@
 import { DirectoryReader } from './readers';
 import { TransformRunner } from './TransformRunner';
-import { contains, Logger, LogLevels } from './utils';
+import { contains, FileSystem, Logger, LogLevels, mergeImportsDeclarationsPaths } from './utils';
 import { Repository } from '../types';
 import { join, sep } from 'path';
 import { getSourceFolderName } from '../utils';
 import * as ts from 'typescript';
 import { EnumTransformer, ImportPathsTransformer, IndexFileTransformer, RootIndexFileTransformer } from './transformers';
 import { Folder } from './interfaces';
-import * as fs from 'fs';
 
 export class DdoocsTransformRunner {
   private readonly directoryReader: DirectoryReader;
   private readonly transformRunner: TransformRunner;
   private readonly logger: Logger;
-  private readonly printer = ts.createPrinter();
+  private readonly fileSystem: FileSystem;
+  private readonly printer = ts.createPrinter({ removeComments: false });
 
   private readonly indexFileTransformer: IndexFileTransformer = new IndexFileTransformer(
     '@ddoocs',
@@ -31,8 +31,10 @@ export class DdoocsTransformRunner {
     private repositories: Repository[]
   ) {
     this.logger = new Logger(logLevel);
-    this.directoryReader = new DirectoryReader(this.logger);
-    this.transformRunner = new TransformRunner(this.logger, this.printer)
+    this.fileSystem = new FileSystem(this.logger);
+
+    this.directoryReader = new DirectoryReader(this.logger, this.fileSystem);
+    this.transformRunner = new TransformRunner(this.logger, this.printer, this.fileSystem)
       .addIndexTransformer((sourceFile) => this.indexTransformer(sourceFile))
       .addIndexTransformer(
         (sourceFile, filePath, folder) =>
@@ -78,7 +80,10 @@ export class DdoocsTransformRunner {
 
     if (folder.name !== getSourceFolderName(repository) || !repository.pseudoRootIndex) return;
 
-    fs.writeFileSync(filePath.replace('index.ts', '_index.ts'), this.printer.printFile(sourceFile));
+    this.fileSystem.writeFile(
+      filePath.replace('index.ts', '_index.ts'),
+      this.printer.printFile(sourceFile)
+    );
 
     const res = this.rootIndexFileTransformer.transform(repository);
     return this.printer.printFile(res as ts.SourceFile);
@@ -104,8 +109,14 @@ export class DdoocsTransformRunner {
         filePath: filePath
       }
     );
-    const res = importPathsTransformer.transform();
-    return this.printer.printFile(res.transformed[0] as ts.SourceFile);
+    const res = importPathsTransformer.transform().transformed[0] as ts.SourceFile;
+    const transformedSourceFile = ts.createSourceFile(
+      res.fileName,
+      this.printer.printFile(res),
+      ts.ScriptTarget.Latest
+    );
+
+    return mergeImportsDeclarationsPaths(sourceFile, transformedSourceFile);
   }
 
   private getRepository(filePath: string): Repository | undefined {

@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import { join, sep } from 'path';
 import { Folder } from '../interfaces';
-import { Logger } from '../utils';
+import { FileSystem, Logger } from '../utils';
 
 const indexFileName = 'index.ts';
 
@@ -11,7 +11,7 @@ enum PathType {
 }
 
 export class DirectoryReader {
-  constructor(private logger: Logger) {}
+  constructor(private readonly logger: Logger, private readonly fileSystem: FileSystem) {}
 
   private isDirectoryOrFile(path: string): PathType {
     const lstat = fs.lstatSync(path);
@@ -32,7 +32,7 @@ export class DirectoryReader {
   }
 
   private readRecursive(path: string): Folder {
-    const directory = fs.readdirSync(path);
+    const directory = this.fileSystem.readDirectory(path);
     const index = directory.find((el) => el === indexFileName);
     if (!index) {
       this.logger.warn(`index not found ${path}`);
