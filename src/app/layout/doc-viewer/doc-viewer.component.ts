@@ -124,7 +124,7 @@ export class DocViewerComponent implements OnDestroy {
       if (descriptionEl) {
         description = descriptionEl.innerHTML;
       }
-      const formattedTitle = title ? `ddoo - ${title}` : 'ddoo';
+      const formattedTitle = title ? `${title} | ddoo ` : 'ddoo';
       this.addDocumentMetaTags(formattedTitle, description);
       this.titleService.setTitle(formattedTitle);
     };
