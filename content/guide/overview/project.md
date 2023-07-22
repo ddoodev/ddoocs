@@ -2,6 +2,37 @@
 Before you start working with discordoo, you need to create a bot token. You can do this by following the instructions on the [Discord Developer Portal](https://discord.com/developers/applications).
 
 ## First Code
+### New, fancy way
+The code of the simplest bot with application commands, for example:
+```ts
+import { DiscordFactory } from 'discordoo'
+
+const app = DiscordFactory.create('discord-bot-token')
+
+app.on('interactionCreate', context => {
+    const { interaction } = context // extracting Interaction from InteractionCreateEventContext
+    const { data: command } = interaction // extracting data as 'command' from Interaction
+
+    if (
+        interaction.isAppCommand() // see Interaction#isAppCommand
+        && command.isChatInput() // see AbstractAppCommandInteractionData#isChatInput
+        && command.name === 'ping' // see ChatInputInteractionData#name
+    ) { // slash command with name 'ping'!
+        interaction.reply(`🏓 pong! ${app.gateway.ping}ms`)
+    }
+})
+
+app.once('ready', () => {
+    app.interactions.commands.create({ // creating a AppCommand every time the bot starts
+        name: 'ping',
+        description: 'ping-pong command!'
+    })
+})
+
+app.start()
+    .then(() => console.log('started using profile with tag:', app.user.tag))
+```
+### Old-fashioned way
 The code of the simplest bot with gateway, for example:
 ```ts
 import { DiscordFactory, IntentsUtil } from 'discordoo'

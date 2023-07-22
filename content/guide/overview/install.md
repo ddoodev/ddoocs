@@ -4,7 +4,11 @@
 [providers on npm](https://www.npmjs.com/package/@discordoo/providers)
 
 ## Runtime
-You'll need to install the [NodeJS javascript runtime](https://nodejs.org/en/download) `v12.18` or newer. **Deno and Bun is not supported**, but we are planning to add support for [Bun javascript runtime](https://bun.sh) in the future, as soon as they add support for the `net` NodeJS API.
+You'll need to install the [NodeJS javascript runtime](https://nodejs.org/en/download) `v16.13` or newer. 
+
+You can also use [Bun javascript runtime](https://bun.sh/docs/installation) `v0.7.0` or newer. Note that Bun `v0.7` with our sharding manager will fail with `Error: Not Implemented`. 
+
+**Deno is not supported**.
 
 ## Installation
 You can install our library using the following command:
@@ -14,6 +18,10 @@ npm i discordoo
 or
 ```shell
 yard add discordoo
+```
+or
+```shell
+bun install discordoo
 ```
 
 ## TypeScript

@@ -14,8 +14,7 @@ const app = DiscordFactory.createRest('discord-bot-token', {
 app.on('interactionCreate', (context: InteractionCreateEventContext) => {
   const { interaction } = context
 
-  if (interaction.type !== InteractionTypes.ApplicationCommand)
-    return
+  if (!interaction.isAppCommand()) return
 
   if (interaction.data.name === 'ping')
     interaction.reply('pong!')
@@ -28,7 +27,7 @@ app.start()
 const app = DiscordFactory.create('discord-bot-token', {
   providers: [
     // example: get events from queue
-    { provide: DiscordooProviders.Gateway, useClass: KafkaGatewayProvider },
+    { provide: DiscordooProviders.Gateway, useClass: KafkaGatewayProviderReceiver },
     // example: use redis as cache storage
     { provide: DiscordooProviders.Cache, useClass: RedisCacheProvider }
   ]

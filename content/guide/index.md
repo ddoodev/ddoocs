@@ -12,4 +12,4 @@ Our library is architecturally built in such a way as to fit any task of any dev
 It was mentioned above about dependency injection. The fact is that discordoo is just a basic library for working with the Discord API, although very pumped, but still similar to the discord.js/eris. But we have a framework that is built on top of discordoo, which is called [waifoo](https://github.com/ddoodev/waifoo). In turn, this framework provides the nest-like experience. We decided to separate the library and the framework so that developers who do not need the framework can use the library, and developers who need the framework can use it. **Quick remind: the library and framework are under development and are not ready for use in production code.**
 
 ## Getting Started
-Go to the [getting started](/guide/start) page.
+Go to the [installation](/guide/overview/install) page.
