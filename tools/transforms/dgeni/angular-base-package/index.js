@@ -15,7 +15,7 @@ const targetPackage = require('../target-package');
 const remarkPackage = require('../remark-package');
 const postProcessPackage = require('dgeni-packages/post-process-html');
 
-const { PROJECT_ROOT, CONTENTS_PATH, OUTPUT_PATH, DOCS_OUTPUT_PATH, TEMPLATES_PATH, AIO_PATH} = require('../../config');
+const { PROJECT_ROOT, CONTENTS_PATH, OUTPUT_PATH, DOCS_OUTPUT_PATH, TEMPLATES_PATH, AIO_PATH, config} = require('../../config');
 const { requireFolder } = require('../../utils');
 
 // prettier-ignore
@@ -38,9 +38,10 @@ module.exports = new Package('angular-base', [
   .processor(require('./processors/renderLinkInfo'))
 
   // overrides base packageInfo and returns the one for the 'angular/angular' repo.
-  .factory('packageInfo', function () {
-    return require(path.resolve(PROJECT_ROOT, 'package.json'));
-  })
+  // .factory('packageInfo', function () {
+  //   return require(path.resolve(PROJECT_ROOT, 'repos', CONFIG.mainRepositoryName , 'package.json'));
+  // })
+
   .factory(require('./readers/json'))
   .factory(require('./services/copyFolder'))
   .factory(require('./services/filterPipes'))

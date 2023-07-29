@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import { Repository } from './types';
+import { Config, Repository } from './types';
 
 export const repositories: Repository[] = [
   {
@@ -42,6 +42,11 @@ export const repositories: Repository[] = [
     }
   }
 ];
+
+export const config: Config = {
+  mainRepositoryName: 'discordoo',
+  repositories: repositories
+};
 
 /* Dgeni paths */
 

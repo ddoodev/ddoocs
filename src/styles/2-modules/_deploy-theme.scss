@@ -1,50 +1,49 @@
-
 aio-shell.mode-archive {
 
   .mat-toolbar.mat-primary, footer {
-    background: linear-gradient(145deg,#263238,#78909C);
+    background: linear-gradient(90deg, rgb(252, 120, 120) 0%, rgb(253, 156, 156) 93%);
   }
 
   .vertical-menu-item {
     &.selected, &:hover {
-      color: #263238;
+      color: #f75959;
     }
   }
 
   .toc-inner ul.toc-list li.active a {
-    color: #263238;
+    color: #f75959;
 
     &:before {
-      background-color: #263238;
+      background-color: #f75959;
     }
   }
 
   .toc-inner ul.toc-list li:hover a {
-    color: #263238;
+    color: #f75959;
   }
 }
 
-aio-shell.mode-next {
+aio-shell.mode-dev {
 
   .mat-toolbar.mat-primary, footer {
-    background: linear-gradient(145deg,#DD0031,#C3002F);
+    background: linear-gradient(90deg, rgba(251,78,78,1) 0%, rgba(249,154,95,1) 50%);
   }
 
   .vertical-menu-item {
     &.selected, &:hover {
-      color: #DD0031;
+      color: #f99a5f;
     }
   }
 
   .toc-inner ul.toc-list li.active a {
-    color: #DD0031;
+    color: #f99a5f;
 
     &:before {
-      background-color: #DD0031;
+      background-color: #f99a5f;
     }
   }
 
   .toc-inner ul.toc-list li:hover a {
-    color: #DD0031;
+    color: #f99a5f;
   }
 }

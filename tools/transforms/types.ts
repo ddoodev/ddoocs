@@ -1,3 +1,8 @@
+export interface Config {
+  mainRepositoryName: string;
+  repositories: Repository[];
+}
+
 /** Represents repository */
 export interface Repository {
   /** Represents modules that declared in source root index.ts.

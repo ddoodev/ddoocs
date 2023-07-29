@@ -46,10 +46,14 @@
             [isWide]="false"
     ></aio-nav-menu>
     <aio-nav-menu [nodes]="sideNavNodes" [currentNode]="currentNodes.SideNav" [isWide]="isSideBySide"></aio-nav-menu>
+
+    <div class="doc-version">
+      <aio-select (changeEmitter)="onDocVersionChange($event.index)" [options]="docVersions" [selected]="currentDocVersion"></aio-select>
+    </div>
   </mat-sidenav>
 
   <section class="sidenav-content" [id]="pageId" role="main">
-    <aio-mode-banner [mode]="deployment.mode" [version]="versionInfo"></aio-mode-banner>
+    <aio-mode-banner *ngIf="versionInfo" [mode]="deployment.mode" [version]="versionInfo"></aio-mode-banner>
     <aio-doc-viewer
             [class.no-animations]="isStarting"
             [doc]="currentDocument"

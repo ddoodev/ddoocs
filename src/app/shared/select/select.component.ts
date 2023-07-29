@@ -1,4 +1,12 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, Output, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  Output,
+  OnInit
+} from '@angular/core';
 
 export interface Option {
   title: string;
@@ -10,7 +18,7 @@ export interface Option {
   template: `<div class="form-select-menu">
     <button class="form-select-button" (click)="toggleOptions()">
       <strong>{{ label }}</strong
-      ><span *ngIf="showSymbol" class="symbol {{ selected.value }}"></span>{{ selected.title }}
+      ><span *ngIf="showSymbol" class="symbol {{ selected?.value }}"></span>{{ selected?.title }}
     </button>
     <ul class="form-select-dropdown" *ngIf="showOptions">
       <li
@@ -29,7 +37,7 @@ export interface Option {
 })
 export class SelectComponent implements OnInit {
   @Input()
-  selected: Option;
+  selected?: Option;
 
   @Input()
   options: Option[];

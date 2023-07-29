@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 const Package = require('dgeni').Package;
-const gitPackage = require('dgeni-packages/git');
+const gitPackage = require('../ddoo-git-package');
 const apiPackage = require('../angular-api-package');
 const contentPackage = require('../angular-content-package');
 const { extname, resolve } = require('canonical-path');

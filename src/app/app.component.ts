@@ -149,7 +149,6 @@ export class AppComponent implements OnInit {
     });
 
     // Compute the version picker list from the current version and the versions in the navigation map
-    /*
     combineLatest(
       this.navigationService.versionInfo,
       this.navigationService.navigationViews.pipe(map((views) => views['docVersions']))
@@ -160,9 +159,12 @@ export class AppComponent implements OnInit {
       // or its title matches the major version of the current version info
       this.currentDocVersion = this.docVersions.find(
         (version) => version.title === this.deployment.mode || version.title === `v${versionInfo.major}`
-      )!;
-      this.currentDocVersion.title += ` (v${versionInfo.raw})`;
-    }); */
+      ) as NavigationNode;
+
+      this.currentDocVersion.title += this.deployment.mode === 'dev'
+        ? ` (${versionInfo.build.replace('sha.', '')})`
+        : ` (v${versionInfo.raw})`;
+    });
 
     this.navigationService.navigationViews.subscribe((views) => {
       this.footerNodes = views['Footer'] || [];
@@ -171,7 +173,7 @@ export class AppComponent implements OnInit {
       this.topMenuNarrowNodes = views['TopBarNarrow'] || this.topMenuNodes;
     });
 
-    // this.navigationService.versionInfo.subscribe((vi) => (this.versionInfo = vi));
+    this.navigationService.versionInfo.subscribe((vi) => (this.versionInfo = vi));
 
     const hasNonEmptyToc = this.tocService.tocList.pipe(map((tocList) => tocList.length > 0));
     combineLatest(hasNonEmptyToc, this.showFloatingToc).subscribe(

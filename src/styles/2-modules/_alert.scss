@@ -33,6 +33,44 @@
         }
     }
 
+    /* --- warning for archive version --- */
+    &.archive-warning {
+        border-left: 10px solid $shrimp;
+        background-color: rgba($shrimp, 0.05);
+
+        * {
+            color: $shrimp;
+        }
+
+        a {
+            color: $shrimp;
+            text-decoration-line: underline;
+
+            &:hover {
+                opacity: .85;
+            }
+        }
+    }
+
+    /* --- warning for dev version --- */
+    &.dev-warning {
+        border-left: 10px solid $shrimp;
+        background: linear-gradient(90deg, rgba(251,78,78,.1) 0%, rgba(249,154,95,.1) 50%);
+
+        * {
+            color: $shrimp;
+        }
+
+        a {
+            color: $shrimp;
+            text-decoration-line: underline;
+
+            &:hover {
+                opacity: .85;
+            }
+        }
+    }
+
     > * {
         margin: 0;
         padding: 8px 16px;

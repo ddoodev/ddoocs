@@ -69,5 +69,15 @@
       "title": "API Reference",
       "tooltip": "Reference"
     }
+  ],
+  "docVersions": [
+    {
+      "title": "next",
+      "url": "https://dev.docs.ddoo.dev/"
+    },
+    {
+      "title": "stable",
+      "url": "https://docs.ddoo.dev/"
+    }
   ]
 }

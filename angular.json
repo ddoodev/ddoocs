@@ -58,71 +58,30 @@
                 }
               ]
             },
-            "next": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
+            "dev": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.next.ts"
+                  "with": "src/environments/environment.dev.ts"
                 }
               ],
-              "serviceWorker": true
+              "serviceWorker": false
             },
             "stable": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.stable.ts"
                 }
-              ],
-              "serviceWorker": true
+              ]
             },
             "archive": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.archive.ts"
                 }
-              ],
-              "serviceWorker": true
+              ]
             },
             "production": {
               "budgets": [
@@ -141,7 +100,7 @@
               "serviceWorker": true
             }
           },
-          "defaultConfiguration": ""
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -152,8 +111,8 @@
             "fast": {
               "browserTarget": "site:build:fast"
             },
-            "next": {
-              "browserTarget": "site:build:next"
+            "dev": {
+              "browserTarget": "site:build:dev"
             },
             "stable": {
               "browserTarget": "site:build:stable"
