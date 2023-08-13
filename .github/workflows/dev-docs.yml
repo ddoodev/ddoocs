@@ -13,6 +13,7 @@ jobs:
     permissions:
       contents: write
       packages: write
+      repository_dispatch: write
 
     steps:
       - name: Checkout repository
