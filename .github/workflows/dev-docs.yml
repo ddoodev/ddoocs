@@ -33,9 +33,6 @@ jobs:
       - name: Build application
         run: npx ng build --configuration=production,dev
 
-      - name: Post build
-        run: npm run postbuild:cf
-
       - name: Publish to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
