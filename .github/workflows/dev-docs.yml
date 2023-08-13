@@ -32,6 +32,9 @@ jobs:
       - name: Patch SW
         run: npm run sw:patch
 
+      - name: Build documentation
+        run: npm run docs:build
+
       - name: Build application
         run: npx ng build --configuration=production,dev --source-map
 
