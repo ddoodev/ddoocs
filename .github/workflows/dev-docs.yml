@@ -1,5 +1,5 @@
-DevDocsDeploy
 ---
+name: DevDocsBuild
 
 on:
   repository_dispatch:
