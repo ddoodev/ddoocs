@@ -1,0 +1,47 @@
+DevDocsDeploy
+---
+
+on:
+  repository_dispatch:
+    types: [ dev_docs_build ]
+
+jobs:
+  # Build docs and deploy to cloudflare pages with dev branch
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Init Submodules
+        run: npm run submodules:init
+
+      - name: Update Submodules
+        run: npm run submodules:update
+
+      - name: Patch SW
+        run: npm run sw:patch
+
+      - name: Build application
+        run: ng build --configuration=production,dev
+
+      - name: Post build
+        run: npm run postbuild:cf
+
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ secrets.CLOUDFLARE_PAGES_PROJECT_NAME }}
+          directory: dist/
+          branch: dev
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
