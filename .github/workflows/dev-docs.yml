@@ -33,7 +33,7 @@ jobs:
         run: npm run sw:patch
 
       - name: Build application
-        run: npx ng build --configuration=production,dev
+        run: npx ng build --configuration=production,dev --source-map
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/pages-action@v1
