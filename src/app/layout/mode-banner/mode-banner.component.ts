@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
           <p>
               This is the <strong>{{ isDev ? 'dev' : 'archived' }} documentation for
               Discordoo{{ versionString }}</strong> Please visit
-              <a href="https://docs.ddoo.dev{{currentPath}}">docs.ddoo.dev</a>
+              <a href="https://docs.ddoo.dev/{{currentPath}}">docs.ddoo.dev</a>
               to see this page for the stable version of Discordoo.
           </p>
       </div>
