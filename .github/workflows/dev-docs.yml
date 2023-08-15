@@ -2,6 +2,9 @@
 name: DevDocsBuild
 
 on:
+  push:
+    branches:
+      - develop
   repository_dispatch:
     types: [ dev_docs_build ]
 
