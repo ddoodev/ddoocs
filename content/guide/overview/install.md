@@ -17,7 +17,7 @@ npm i discordoo
 ```
 or
 ```shell
-yard add discordoo
+yarn add discordoo
 ```
 or
 ```shell
