@@ -1,18 +1,14 @@
 import * as ts from 'typescript';
 
 export class EnumTransformer {
-  private static sourceFile: ts.SourceFile;
-
-  constructor(sourceFile: ts.SourceFile) {
-    EnumTransformer.sourceFile = sourceFile;
-  }
+  constructor(private sourceFile: ts.SourceFile) {}
 
   transform() {
     try {
-      return ts.transform(EnumTransformer.sourceFile, [this.transformer]);
+      return ts.transform(this.sourceFile, [this.transformer.bind(this)]);
     }
     catch (e) {
-      throw new Error(`error while processing ${EnumTransformer.sourceFile.fileName}: ${e}`);
+      throw new Error(`error while processing ${this.sourceFile.fileName}: ${e}`);
     }
   }
 
@@ -45,7 +41,7 @@ export class EnumTransformer {
               );
               newMembers.push(newMember);
             } else {
-              lastValue = Number(initializer.getText(EnumTransformer.sourceFile));
+              lastValue = Number(initializer.getText(this.sourceFile));
               newMembers.push(member);
             }
           }

@@ -3,10 +3,12 @@ import { Folder } from './interfaces';
 import { join } from 'path';
 import { FileSystem, Logger } from './utils';
 
-/* [string, string, boolean] -
+/*
+ * [string, string, boolean] -
  * transformation result,
  * filepath for write file,
- * create source file based on this result */
+ * create source file based on this result
+ * */
 type TransformerCallback =
   (sourceFile: ts.SourceFile, filePath: string, folder: Folder) => string | [ string, string, boolean ] | undefined;
 
@@ -84,6 +86,6 @@ export class TransformRunner {
 
   private createSourceFile(fileName: string, sourceText: string) {
     return ts.createSourceFile(fileName, sourceText, this.languageVersion ?? ts.ScriptTarget.Latest);
-    //return program.getSourceFile(fileName) as ts.SourceFile;
+    // return program.getSourceFile(fileName) as ts.SourceFile;
   }
 }

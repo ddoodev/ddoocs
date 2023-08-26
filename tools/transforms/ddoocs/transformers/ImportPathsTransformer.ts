@@ -17,42 +17,32 @@ export interface AbsolutePaths {
 }
 
 export class ImportPathsTransformer {
-  /** Typescript source file. */
-  private static sourceFile: ts.SourceFile;
-  /** Alias used for short paths.
+  /**
    *
-   * ex. @src */
-  private static sourceFolderAlias: string;
-  /** Source folder name */
-  private static sourceFolderName: string;
-  /** Package repository name.
+   * @param sourceFile Typescript source file.
+   * @param sourceFolderAlias Alias used for short paths. ex. @src
+   * @param sourceFolderName Source folder name
+   * @param packageRepositoryName Package repository name.
    *
-   * ex. in @discordoo/providers package repository name will be @discordoo */
-  private static packageRepositoryName: string;
-  /** Absolute paths map */
-  private static absolutePaths: AbsolutePaths;
-
+   * ex. in @discordoo/providers package repository name will be @discordoo
+   *
+   * @param absolutePaths Absolute paths map
+   */
   constructor(
-    sourceFile: ts.SourceFile,
-    sourceFolderAlias: string,
-    sourceFolderName: string,
-    packageRepositoryName: string,
-    absolutePaths: AbsolutePaths
-  ) {
-    ImportPathsTransformer.sourceFile = sourceFile;
-    ImportPathsTransformer.sourceFolderAlias = sourceFolderAlias;
-    ImportPathsTransformer.sourceFolderName = sourceFolderName;
-    ImportPathsTransformer.packageRepositoryName = packageRepositoryName;
-    ImportPathsTransformer.absolutePaths = absolutePaths;
-  }
+    private sourceFile: ts.SourceFile,
+    private sourceFolderAlias: string,
+    private sourceFolderName: string,
+    private packageRepositoryName: string,
+    private absolutePaths: AbsolutePaths
+  ) {}
 
   transform() {
     try {
-      return ts.transform(ImportPathsTransformer.sourceFile, [this.transformer]);
+      return ts.transform(this.sourceFile, [this.transformer.bind(this)]);
     }
     catch (e) {
       throw new Error(
-        `error while processing ImportPathsTransformer ${ImportPathsTransformer.sourceFile.fileName}: ${e}`
+        `error while processing ImportPathsTransformer ${this.sourceFile.fileName}: ${e}`
       );
     }
   }
@@ -65,33 +55,32 @@ export class ImportPathsTransformer {
         let updatedStringLiteral: ts.StringLiteral | undefined = undefined;
 
         if (ts.isStringLiteral(node.moduleSpecifier)) {
-          const text = node.moduleSpecifier.getText(ImportPathsTransformer.sourceFile);
+          const text = node.moduleSpecifier.getText(this.sourceFile);
           const path = text.replace(/'|"/g, '');
 
-          if (path.startsWith(ImportPathsTransformer.sourceFolderAlias)) {
+          if (path.startsWith(this.sourceFolderAlias)) {
             const relativeSourcePath = relative(
-              ImportPathsTransformer.absolutePaths.filePath,
-              ImportPathsTransformer.absolutePaths.sourceFolderPath
+              this.absolutePaths.filePath,
+              this.absolutePaths.sourceFolderPath
             );
 
             const replacedPath = path.replace(
-              ImportPathsTransformer.sourceFolderAlias,
-              join(relativeSourcePath, ImportPathsTransformer.sourceFolderName)
+              this.sourceFolderAlias,
+              join(relativeSourcePath, this.sourceFolderName)
             ).split(sep).join('/');
 
             updatedStringLiteral = factory.createStringLiteral(replacedPath);
-          }
-          else if (path.startsWith(ImportPathsTransformer.packageRepositoryName)) {
+          } else if (path.startsWith(this.packageRepositoryName)) {
             const repositoryName = path.split('/')[1];
             if (repositoryName) {
               const packageSourceFolderPath = join(
-                ImportPathsTransformer.absolutePaths.repositoriesRootPath,
+                this.absolutePaths.repositoriesRootPath,
                 repositoryName,
-                ImportPathsTransformer.sourceFolderName
+                this.sourceFolderName
               );
 
-              const folderPath = ImportPathsTransformer.absolutePaths.filePath
-                .replace(basename(ImportPathsTransformer.absolutePaths.filePath), '');
+              const folderPath = this.absolutePaths.filePath
+                .replace(basename(this.absolutePaths.filePath), '');
 
               const relativePackageSourceFolderPath = relative(
                 folderPath,
@@ -119,6 +108,7 @@ export class ImportPathsTransformer {
 
       return ts.visitEachChild(node, visitor, context);
     };
+
     return (sourceFile: ts.SourceFile) => ts.visitNode(sourceFile, visitor) as ts.SourceFile;
   }
 }
