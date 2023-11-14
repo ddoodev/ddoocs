@@ -1,7 +1,7 @@
 import * as ts from 'typescript';
 import { Folder } from './interfaces';
 import { join } from 'path';
-import { FileSystem, Logger } from './utils';
+import { IFileSystem, Logger } from './utils';
 
 /*
  * [string, string, boolean] -
@@ -18,8 +18,7 @@ export class TransformRunner {
 
   constructor(
     private readonly logger: Logger,
-    private readonly printer: ts.Printer,
-    private readonly fileSystem: FileSystem,
+    private readonly fileSystem: IFileSystem,
     private readonly languageVersion?: ts.ScriptTarget,
   ) {}
 

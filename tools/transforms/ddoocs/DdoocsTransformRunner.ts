@@ -1,18 +1,27 @@
 import { DirectoryReader } from './readers';
 import { TransformRunner } from './TransformRunner';
-import { contains, FileSystem, Logger, LogLevels, mergeImportsDeclarationsPaths } from './utils';
+import {
+  contains,
+  FileSystem,
+  IFileSystem,
+  InMemoryFileSystem,
+  Logger,
+  LogLevels,
+  mergeImportsDeclarationsPaths
+} from './utils';
 import { Repository } from '../types';
 import { join, sep } from 'path';
 import { getSourceFolderName } from '../utils';
 import * as ts from 'typescript';
 import { EnumTransformer, ImportPathsTransformer, IndexFileTransformer, RootIndexFileTransformer } from './transformers';
 import { Folder } from './interfaces';
+import { Volume } from 'memfs/lib/volume';
 
 export class DdoocsTransformRunner {
   private readonly directoryReader: DirectoryReader;
   private readonly transformRunner: TransformRunner;
   private readonly logger: Logger;
-  private readonly fileSystem: FileSystem;
+  private readonly fileSystem: IFileSystem;
   private readonly printer = ts.createPrinter({ removeComments: false });
 
   private readonly indexFileTransformer: IndexFileTransformer = new IndexFileTransformer(
@@ -28,13 +37,19 @@ export class DdoocsTransformRunner {
   constructor(
     logLevel: LogLevels,
     private repositoryPath: string,
-    private repositories: Repository[]
+    private repositories: Repository[],
+    volume?: Volume
   ) {
     this.logger = new Logger(logLevel);
-    this.fileSystem = new FileSystem(this.logger);
+
+    if (volume) {
+      this.fileSystem = new InMemoryFileSystem(this.logger, volume);
+    } else {
+      this.fileSystem = new FileSystem(this.logger);
+    }
 
     this.directoryReader = new DirectoryReader(this.logger, this.fileSystem);
-    this.transformRunner = new TransformRunner(this.logger, this.printer, this.fileSystem)
+    this.transformRunner = new TransformRunner(this.logger, this.fileSystem)
       .addIndexTransformer((sourceFile) => this.indexTransformer(sourceFile))
       .addIndexTransformer(
         (sourceFile, filePath, folder) =>

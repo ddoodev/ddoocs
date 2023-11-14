@@ -1,7 +1,8 @@
 import * as fs from 'fs';
 import { Logger } from './Logger';
+import { IFileSystem } from './IFileSystem';
 
-export class FileSystem {
+export class FileSystem implements IFileSystem {
   constructor(private logger: Logger) {}
 
   public readDirectory(path: string): string[] {

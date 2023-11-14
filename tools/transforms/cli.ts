@@ -4,7 +4,9 @@ import * as angularContent from './dgeni/angular-content-package';
 import * as yargs from 'yargs';
 import * as process from 'process';
 import { DdoocsTransformRunner, LogLevels } from './ddoocs';
-import { API_SOURCE_PATH, repositories } from './config';
+import { API_SOURCE_PATH, PROJECT_ROOT, repositories } from './config';
+import { getInMemoryReadSyncFs, memFsVolumeFactory, monkeyPatchFs } from './utils';
+import { Volume } from 'memfs/lib/volume';
 
 type DgeniLogLevels = 'error' | 'warn' | 'info' | 'http' | 'verbose' | 'debug' | 'silly';
 
@@ -24,6 +26,11 @@ const args = yargs
     describe: 'Run Dgeni-only transformations for source code',
     type: 'boolean',
     default: false
+  })
+  .options('use-memfs', {
+    describe: 'Use in-memory fs to pipe ddoocs and dgeni transformers',
+    type: 'boolean',
+    default: true
   });
 
 export class Executor {
@@ -49,7 +56,7 @@ export class Executor {
   }
 
   private generateContentOnly(): void {
-    const packages = [angularContent];
+    const packages: Package[] = [ angularContent ];
     if (this.dgeniCliPackage) {
       packages.push(this.dgeniCliPackage);
     }
@@ -58,26 +65,58 @@ export class Executor {
       .generate()
       .then(() => console.log('Finished generating content'))
       .catch((err) => {
-        console.log('Catched error: ', err);
+        console.log('Caught dgeni error: ', err);
         process.exit(1);
       });
   }
 
   private generateFullDocs(): void {
-    const packages = [angularMain];
+    const packages: Package[] = [ angularMain ];
     if (this.dgeniCliPackage) {
       packages.push(this.dgeniCliPackage);
     }
 
     if (!this.parsedArgs.dgeniOnly) {
-      new DdoocsTransformRunner(this.logLevel, API_SOURCE_PATH, repositories).run();
+      if (this.parsedArgs.useMemfs) {
+        const inMemoryDirs = ['repos'];
+        const volume = memFsVolumeFactory(PROJECT_ROOT, inMemoryDirs);
+        const pseudoReadFs = getInMemoryReadSyncFs(
+          PROJECT_ROOT,
+          inMemoryDirs,
+          volume
+        );
+
+        const proxiedVolume = new Proxy(volume, {
+          get(target: Volume, property: keyof Volume) {
+            switch (property) {
+              case 'readFileSync':
+                return pseudoReadFs.readFileSync;
+              case 'readdirSync':
+                return pseudoReadFs.readdirSync;
+              default:
+                return target[property];
+            }
+          }
+        });
+
+        new DdoocsTransformRunner(
+          this.logLevel,
+          API_SOURCE_PATH,
+          repositories,
+          proxiedVolume
+        ).run();
+
+        monkeyPatchFs(pseudoReadFs);
+      } else {
+        new DdoocsTransformRunner(this.logLevel, API_SOURCE_PATH, repositories).run();
+      }
     }
 
     new Dgeni(packages)
       .generate()
       .then(() => console.log('Finished generating docs'))
       .catch((err) => {
-        console.log('Catched error: ', err);
+        console.log('Caught dgeni error: ', err);
         process.exit(1);
       });
   }

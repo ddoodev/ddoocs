@@ -1,3 +1,5 @@
+import * as fs from 'fs';
+
 export interface Config {
   mainRepositoryName: string;
   repositories: Repository[];
@@ -43,3 +45,6 @@ export interface NamedExport {
   exportedMemberNames: string[];
   path: string;
 }
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type FsMethods = Record<keyof typeof fs, Function>;

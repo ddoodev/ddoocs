@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import { join, sep } from 'path';
 import { Folder } from '../interfaces';
-import { FileSystem, Logger } from '../utils';
+import { IFileSystem, Logger } from '../utils';
 
 const indexFileName = 'index.ts';
 
@@ -11,7 +11,7 @@ enum PathType {
 }
 
 export class DirectoryReader {
-  constructor(private readonly logger: Logger, private readonly fileSystem: FileSystem) {}
+  constructor(private readonly logger: Logger, private readonly fileSystem: IFileSystem) {}
 
   private isDirectoryOrFile(path: string): PathType {
     const lstat = fs.lstatSync(path);

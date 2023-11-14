@@ -28,7 +28,6 @@ const packageMap = {
 
 
 function createPackage(packageName) {
-
   return new Package('author-api', [apiPackage])
     .config(function(readTypeScriptModules) {
       readTypeScriptModules.sourceFiles = packageMap[packageName];
